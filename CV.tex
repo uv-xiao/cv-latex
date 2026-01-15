@@ -1,0 +1,418 @@
+%------------------------------------------------------------------------------
+% CV in Latex
+% Author : Charles Rambo
+% Based off of: https://github.com/sb2nov/resume and Jake's Resume on Overleaf
+% Most recently updated version may be found at https://github.com/fizixmastr 
+% License : MIT
+%------------------------------------------------------------------------------
+
+% \documentclass[A4,11pt]{article}
+\documentclass[letterpaper,11pt]{article} %For use in US
+\usepackage{CJKutf8}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{tikz}
+\input{glyphtounicode}
+
+\begin{comment}
+I am by no means a professional when it comes to the CV's/resumes, I have
+received various trainings on how to write a CV and resume from my high 
+school, as well as the Austin College and University of Eastern Finland's
+career counseling departments. As I intend to share my CV as a template, I 
+feel that it is my responsibility to provide explanations of my work.
+\end{comment}
+
+
+%-----FONT OPTIONS-------------------------------------------------------------
+\begin{comment}
+The font of the document will impact not just how readable it is, but how it is
+perceived. In the "The Craft of Scientific Writing" by Michael Alley, shares a
+common fonts for publication as well as their use. I have chosen to use
+Palatino for its legibility, some others are given below. There is far too much
+about typography to discus here. Note: serif fonts have short projecting
+strokes, sans-serif fonts are sans (without) these strokes.
+\end{comment}
+
+
+% serif
+ \usepackage{palatino}
+% \usepackage{times} %This is the default as well
+% \usepackage{charter}
+
+% sans-serif
+% \usepackage{helvet}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+%-----PAGE SETUP---------------------------------------------------------------
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-1cm}
+\addtolength{\evensidemargin}{-1cm}
+\addtolength{\textwidth}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{2cm}
+
+% Margins for US Letter size
+%\addtolength{\oddsidemargin}{-0.5in}
+%\addtolength{\evensidemargin}{-0.5in}
+%\addtolength{\textwidth}{1in}
+%\addtolength{\topmargin}{-.5in}
+%\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0cm}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that .pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-----CUSTOM COMMANDS FOR FORMATTING SECTIONS----------------------------------
+\newcommand{\CVItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\CVSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \small#3 & \small #4 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\CVSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \text{\small#1} & \text{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\CVSubItem}[1]{\CVItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\CVSubHeadingListStart}{\begin{itemize}[leftmargin=0.5cm, label={}]}
+% \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]} % Uncomment for US
+\newcommand{\CVSubHeadingListEnd}{\end{itemize}}
+\newcommand{\CVItemListStart}{\begin{itemize}}
+\newcommand{\CVItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%------------------------------------------------------------------------------
+% CV STARTS HERE  %
+%------------------------------------------------------------------------------
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+%-----HEADING------------------------------------------------------------------
+\begin{comment}
+In Europe it is common to include a picture of ones self in the CV. Select
+which heading appropriate for the document you are creating.
+\end{comment}
+
+% \begin{minipage}[c]{0.05\textwidth}
+% \-\
+% \end{minipage}
+% \begin{minipage}[c]{0.2\textwidth}
+% \begin{tikzpicture}
+%     \clip (0,0) circle (1.75cm);
+%     \node at (0,-.7) {\includegraphics[width = 9cm]{portrait}}; 
+%     % if necessary the picture may be moved by changing the at (coordinates)
+%     % width defines the 'zoom' of the picture
+% \end{tikzpicture}
+% \hfill\vline\hfill
+% \end{minipage}
+% \begin{minipage}[c]{0.4\textwidth}
+%     \textbf{\Huge {Youwei Xiao}} \\ \vspace{1pt} 
+%     \small{Chinese Name: 肖有为} \\
+%     % \scshape sets small capital letters, remove if desired
+%     \small{+86 185 1920 4005} \\
+%     \href{mailto:shallwe@pku.edu.cn}{\underline{shallwe@pku.edu.cn}}\\
+%     % Be sure to use a professional *personal* email address
+%     % \href{https://www.linkedin.com/in/charles-rambo/}{\underline{linkedin.com/in/charles-rambo}} \\
+%     % you should adjust you linked in profile name to be professional and recognizable
+%     % \href{https://github.com/fizixmastr}{\underline{github.com/fizixmastr}}
+% \end{minipage}
+
+% Without picture
+\begin{center}
+    \textbf{\Huge {Youwei Xiao}} \\ \vspace{1pt} 
+    \small{Chinese Name: 肖有为} \\
+    % \scshape sets small capital letters, remove if desired
+    \small{+86 185 1920 4005} \\
+    \href{mailto:shallwe@pku.edu.cn}{\underline{shallwe@pku.edu.cn}}\\
+%     % Be sure to use a professional *personal* email address
+%     % \href{https://www.linkedin.com/in/charles-rambo/}{\underline{linkedin.com/in/charles-rambo}} \\
+%     % you should adjust you linked in profile name to be professional and recognizable
+%     % \href{https://github.com/fizixmastr}{\underline{github.com/fizixmastr}}
+\end{center}
+
+
+
+\begin{comment}
+This CV was written for specifically for positions I was applying for in
+academia, and then modified to be a template.
+
+A standard CV is about two pages long where as a resume in the US is one page.
+sections can be added and removed here with this in mind. In my experience, 
+education, and applicable work experience and skills are the most import things
+to include on a resume. For a CV the Europass CV suggests the categories: Work
+Experience, Education and Training, Language Skills, Digital Skills,
+Communication and Interpersonal Skills, Conferences and Seminars, Creative Works
+Driver's License, Hobbies and Interests, Honors and Awards, Management and
+Leadership Skills, Networks and Memberships, Organizational Skills, Projects,
+Publications, Recommendations, Social and Political Activities, Volunteering.
+
+Your goal is to convey a who, what , when, where, why for every item you share. 
+The who is obviously you, but I believe the rest should be done in that order.
+For example below. An employer cares most about the degree held and typically 
+less about the institution or where it is located (This is still good 
+information though). Whatever order you choose be consistent throughout.
+\end{comment}
+
+%-----EDUCATION----------------------------------------------------------------
+\section{Education}
+  \CVSubHeadingListStart
+%    \CVSubheading % Example
+%      {Degree Achieved}{Years of Study}
+%      {Institution of Study}{Where it is located}
+    % \CVSubheading
+    %   {{Master of Science $|$ \emph{\small{Photonics}}}}{Aug. 2019 -- May 2021}
+    %   {University of Eastern Finland}{Joensuu, Finland}
+    \CVSubheading
+      {{Bachelor of Science degree in Computer Science}}{September 2018 - July 2022}
+      {School of Electronics Engineering and Computer Science, Peking University}{Beijing, China}
+    \CVSubheading
+      {{Ph.D. Candidate in Integrated Circuit Science and Engineering}}{September 2022 - now}
+      {School of Integrated Circuits, Peking University}{Beijing, China}
+      \CVItemListStart
+      \CVItem{Course of study: Data Stream Algorithms, \ Analysis and design of Digital VLSI, \ Analysis and design of Digital VLSI (practice), \ Design Automation and Computing System, \ Algorithms for Engineering in Integrated Circuits, \ Design and Research Exploration for Advanced Chip Architectures}
+      \CVItemListEnd
+      % \CVItemListStart
+      %   \CVItem{Relevant Coursework and Scores: Introduction to Computing(A)(Honor Track)(97/100), \ Practice of Programming in C\&C++(96/100), \ Introduction to Artificial Intelligence(88/100), \ Data Structure and Algorithm(A)(90/100), \ Introduction to Computer System(91/100),\ Practice of Data Structure and Algorithm(96/100), \ Algorithm Design and Analysis(86/100), \ Machine Learning(87/100), \ Computer Architectures(91/100), \ Lab on Computer Organization and Architecture(99/100), \ Principles of Compilers(91/100)}
+      % \CVItemListEnd
+    % \CVSubheading
+    %   {Associate of Liberal Sciences}{Aug. 2015 -- May 2016}
+    %   {North Lake College}{Irving, TX}
+  \CVSubHeadingListEnd
+
+\section{Research}
+
+My research focus encompasses computer architecture and hardware-software interfaces. I specialize in developing methodologies that harness software techniques, such as programming languages, compilers, and program analysis, to facilitate the design of efficient domain-specific computing systems.
+
+
+\section{Publications}
+
+\CVItemListStart
+\CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. In Proceedings of the 62nd ACM/IEEE Design Automation Conference (DAC '25).}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. In 5th Workshop on Languages, Tools, and Techniques for Accelerator Design (LATTE’25).
+}
+\CVItem{Fan Cui, \textbf{Youwei Xiao}, Kexing Zhou, and Yun Liang. 2025. An Empirical Comparison of LLM-based Hardware Design and High-level Synthesis. In Proceedings of the 2025 ACM/SIGDA International Symposium on Field Programmable Gate Arrays (FPGA '25).}
+\CVItem{Fan Cui, Chenyang Yin, Kexing Zhou, \textbf{Youwei Xiao}, Guangyu Sun, Qiang Xu, Qipeng Guo, Yun Liang, Xingcheng Zhang, Demin Song, and Dahua Lin. 2024. OriGen: Enhancing RTL Code Generation with Code-to-Code Augmentation and Self-Reflection. In Proceedings of the 43rd IEEE/ACM International Conference on Computer-Aided Design (ICCAD '24).}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Kexing Zhou, and Yun Liang. 2024. Cement: Streamlining FPGA Hardware Design with Cycle-Deterministic eHDL and Synthesis. In Proceedings of the 2024 ACM/SIGDA International Symposium on Field Programmable Gate Arrays (FPGA ’24)}
+\CVItem{Ruifan Xu, \textbf{Youwei Xiao}, Jin Luo, and Yun Liang. 2022. HECTOR: A Multi-Level Intermediate Representation for Hardware Synthesis Methodologies. In Proceedings of the 41st IEEE/ACM International Conference on Computer-Aided Design (ICCAD '22).}
+\CVItemListEnd
+
+
+
+%-----HONORS AND AWARDS--------------------------------------------------------
+% \section{Honors and Awards}
+%   \CVSubHeadingListStart
+% %    \CVSubheading %Example
+% %      {What}{When}
+% %      {Short Description}{}
+%     \CVSubheading
+%       {Merit Student}{2018-2019 \& 2019-2020}
+%       {Awarded to 10\% students for their great comprehensive score}{}
+%     \CVSubheading
+%       {Yang Fuqing \& Wang Yangyuan Academician Scholarship}{2018-2019 }
+%       {Awarded to only 5 students at EECS, Peking University, for academic excellence}{}
+%     % \CVSubheading
+%     %   {Merit Student}{2019-2020 }
+%     %   {Awarded to 10\% students for their great comprehensive score}{}
+%     \CVSubheading
+%       {Shenzhen Stock Exchange Scholarship}{2019-2020 }
+%       {Awarded to 17 students from EECS, Peking University}{}
+%     % \CVSubheading
+%     %   {Second Place in EDAthon 2020}{August 2020}
+%     %   {Programming Competition on Electronic Design Automation}{IEEE CEDA Hong Kong Chapter}
+%     % \CVSubheading
+%     %   {Third Prize in APMCM 2020}{November 2020}
+%     %   {Asia and Pacific Mathematical Contest in Modeling}{APMCP Organizing Commitee}
+%     % \CVSubheading
+%     %   {Second Prize in NOI 2017}{July 2017}
+%     %   {National Olympiad in Informatics}{China Computer Federation}
+%     % \CVSubheading
+%     %   {Second Prize in APIO 2017}{May 2017}
+%     %   {Asia Pacific Informatics Olympaid(China District)}{China Computer Federation}
+%   \CVSubHeadingListEnd
+  
+%-----WORK EXPERIENCE----------------------------------------------------------
+\begin{comment}
+try to briefly explain what you did and why it is relevant to the position you
+are seeking
+\end{comment}
+
+% \section{Work Experience}
+%   \CVSubHeadingListStart
+% %    \CVSubheading %Example
+% %      {What you did}{When you worked there}
+% %      {Who you worked for}{Where they are located}
+% %      \CVItemListStart
+% %        \CVItem{Why it is important to this employer}
+% %      \CVItemListEnd
+%     \CVSubheading
+%       {Algorithm Intern}{June 2019 -- August 2019}
+%       {Megvii(Beijing) Technology Co., Ltd}{Beijing, Mainland China}
+%       \CVItemListStart
+%         \CVItem{Intern of Video Team in Megvii Research}
+%         \CVItem{Learned basic knowledge about single object tracking, mastered the basic usage of pyTorch}
+%         \CVItem{Read papers SiamMask (CVPR2019) and ATOM(CVPR2019), retrained and tested the models}
+%         \CVItem{Collected and sorted out several SOT datasets, contributing to the team's model improvement process}
+%       \CVItemListEnd
+%   \CVSubHeadingListEnd
+
+%-----TEACHING EXPERIENCE------------------------------------------------------
+% \begin{comment}
+% Section is here as it applied to my application for positions in academia. 
+% Remember to tailor the resume for to the position.
+% \end{comment}
+
+\section{Teaching Experience}
+  \CVSubHeadingListStart
+%    \CVSubheading
+%      {What}{When}
+%      {School}{Where}
+    \CVSubheading
+      {Teaching Assitant}{Fall 2020}
+      {Introduction to Computer Systems}{Peking University}
+      % \CVItemListStart
+      %   \CVItem{Host the discussion class every week, summarizing key points of each lecture}
+      %   \CVItem{Helped 13 students to finish  8 course labs, and graded their assignments }
+      % \CVItemListEnd
+    \CVSubheading
+      {Teaching Assitant}{Spring 2022 \& Fall 2022}
+      {High-level Chip Design}{Peking University}
+  \CVSubHeadingListEnd
+  
+% %-----PROJECTS AND RESEARCH----------------------------------------------------
+% \begin{comment}
+% Ideally the title of the work should speak for what it is. However, if you feel
+% like you should explain more about why the project is applicable to this job,
+% use item list as is shown in the work experience section.
+% \end{comment}
+
+% \section{Projects and Research}
+%   \CVSubHeadingListStart
+% %    \CVSubheading
+% %      {Title of Work}{When it was done}
+% %      {Institution you worked with}{unused}
+%     \CVSubheading
+%       {{Keyword-related Document Retrieval Based on NSF data $|$ \emph{\small{C++}}}} {Fall 2018}
+%       {Course Project of Introduction to Computing(A)(Honor Track) }{}
+%     \CVSubheading
+%       {{MCTS-based AI Program that Plays Game of the Amazons $|$ \emph{\small{C++}}}}{Spring 2019}
+%       {Course Project of Introduction to Artificial Intelligence}{}
+%     \CVSubheading
+%       {{Blockchain-based Crowdsourced Data Annotation Platform $|$ \emph{\small{Solidity, Python}}}}{Spring 2020}
+%       {Course Project of Algorithm Design and Analysis}{}
+%     \CVSubheading
+%       {Parallel Implementation of Hines Algorithm Based on OpenMP $|$ \emph{\small{C}}}{Spring 2020}
+%       {Course Project of Introduction to Parallel and Distributed Computing}{}
+%     \CVSubheading
+%       {{RoBERTa-based Refined Model for Tweet Sentiment Extraction } $|$ \emph{\small{Python, TensorFlow}}}{Summer 2020}
+%       {Bronze Prize in the Kaggle Competition, Couse Project of Machine Learning}{}
+%     \CVSubheading
+%       {{Chating App implemented with JavaFx, Netty and SQLite} $|$ \emph{\small{Java}}}{Summer 2020}
+%       {Course Project of Java Programming}{}
+%     \CVSubheading
+%       {{Branch Prediction and  Standard Instrument Extension on Tinyriscv Processor}  $|$ \emph{\small{Verilog}}}{Fall 2020}
+%       {Course Project of Lab on Computer Organization and Architecture}{}
+%     \CVSubheading
+%       {{FPGA-based CNN Accelerator by Vivado HLS}  $|$ \emph{\small{C++}} }{Fall 2020}
+%       {Course Project of Lab on Computer Organization and Architecture}{}
+%     % \CVSubheading
+%     %   {Survey for Qubit Mapping}{Febrary 2021}
+%     %   {Summarize several exact or heauristic algorithms for qubit mapping problem}{}
+%     % \CVSubheading
+%     %   {{Parallel Pattern based High Level Synthesis for sparse tensor computation}}{Ongoing}
+%     %   {} {}
+%   \CVSubHeadingListEnd
+
+%-----CONFERENCES AND PRESENTATIONS--------------------------------------------
+% \begin{comment}
+% Again the title should have already been enough, but if it is necessary to add
+% descriptions maintain the consistency from prior sections
+% \end{comment}
+
+% \section{Conferences and Presentations}
+%   \CVSubHeadingListStart
+% %    \CVSubheading % Example
+% %      {Work Presented}{When}
+% %      {Occasion}{}
+%     \CVSubheading
+%       {Photometric Filter Fidelity and Use for Be Star Identification}{November 2017}
+%       {Austin College Physics Research Seminar}{}
+%     \CVSubheading
+%       {Reflectometry for Volumetric Soil Moisture Measurement}{May 2017}
+%       {Austin College Atmospheric Physics Fair}{}
+%     \CVSubheading
+%       {Design and Manufacturing of Products using 3D Printing}{April 2017}
+%       {Austin College Student Scholarship Conference}{}
+%   \CVSubHeadingListEnd
+
+%-----COMMUNITY INVOLVEMENT----------------------------------------------------
+% \section{Community Involvement}
+%   \CVSubHeadingListStart
+% %    \CVSubheading %Example
+% %      {What you did}{When you worked there}
+% %      {Who you worked for}{Where they are located}
+%     \CVSubheading
+%       {Austin College Community Tutors}{Fall 2017 -- Fall 2018}
+%       {Free tutoring for local students in science and mathematics}{Sherman, TX}
+%     \CVSubheading
+%       {River Legacy Nature Center}{September 2015 -- August 2016}
+%       {Provided assistance for various youth science education programs}{Arlington, TX}
+%     \CVSubheading
+%       {Back on My Feet Run Club}{April 2014 -- August 2015}
+%       {Helping to reestablish homeless persons in the community}{Austin, TX}
+%   \CVSubHeadingListEnd
+
+% %-----SKILLS-------------------------------------------------------------------
+% \begin{comment}
+% This section is compressed from the various skills sections that Euro CV
+% recommends.
+% \end{comment}
+
+% \section{Skills}
+%  \begin{itemize}[leftmargin=0.5cm, label={}]
+%     \small{\item{
+%     %  \textbf{Languages}{: English (Native), Spanish (B1), Finnish (A1)} \\
+%      \textbf{Programming}{: C, C++, Java, Python, Pytorch, Scala, Verilog} \\
+%      \textbf{Tools}{: Vivado HLS, Git}\\
+%      \textbf{Document Creation}{: Microsoft Office Suite, LaTex, Markdown} \\
+%      \textbf{Language}{: Chinese(native), English(trying hard to improve)}
+%     }}
+%  \end{itemize}
+    
+%-----RESEARCH INTERESTS----------------------------------------------------------------
+
+% \section{Research Interests}
+% Currently, I’m working on the development of our own high-level synthesis flow, we plan to run through the flow, try more optimization passes and do experiments. I have a greatly strong willingness to build the next-generation open-source high-level synthesis tool, which is able to beat commercial HLS tools in broad application domains. I’m going to design multilevel IRs to support a variety of optimizations, try to integrate current frontier techniques for reference and explore brand new analysis and optimization methods
+\end{CJK*}
+\end{document}
