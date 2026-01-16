@@ -8,7 +8,11 @@
 
 % \documentclass[A4,11pt]{article}
 \documentclass[letterpaper,11pt]{article} %For use in US
-\usepackage{CJKutf8}
+% Use LuaLaTeX for proper bold + CJK support
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\usepackage{luatexja-fontspec}
+\setmainjfont{AR PL UMing CN}
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
@@ -20,7 +24,7 @@
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \usepackage{tikz}
-\input{glyphtounicode}
+% \input{glyphtounicode} % pdfTeX only, not needed for LuaLaTeX
 
 \begin{comment}
 I am by no means a professional when it comes to the CV's/resumes, I have
@@ -42,10 +46,11 @@ strokes, sans-serif fonts are sans (without) these strokes.
 \end{comment}
 
 
-% serif
- \usepackage{palatino}
+% serif - lmodern loaded at top before CJK for bold to work
+% \usepackage{palatino} % deprecated, no bold support
+% \usepackage{newpxtext} % modern Palatino with bold/italic support
 % \usepackage{times} %This is the default as well
-% \usepackage{charter}
+% \usepackage{charter} % bold not installed on this system
 
 % sans-serif
 % \usepackage{helvet}
@@ -80,13 +85,11 @@ strokes, sans-serif fonts are sans (without) these strokes.
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
 % Ensure that .pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+% \pdfgentounicode=1 % pdfTeX only, LuaLaTeX handles Unicode natively
 
 %-----CUSTOM COMMANDS FOR FORMATTING SECTIONS----------------------------------
 \newcommand{\CVItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
+  \item\small #1 \vspace{-2pt}
 }
 
 \newcommand{\CVSubheading}[4]{
@@ -118,7 +121,6 @@ strokes, sans-serif fonts are sans (without) these strokes.
 % CV STARTS HERE  %
 %------------------------------------------------------------------------------
 \begin{document}
-\begin{CJK*}{UTF8}{gbsn}
 %-----HEADING------------------------------------------------------------------
 \begin{comment}
 In Europe it is common to include a picture of ones self in the CV. Select
@@ -151,15 +153,12 @@ which heading appropriate for the document you are creating.
 
 % Without picture
 \begin{center}
-    \textbf{\Huge {Youwei Xiao}} \\ \vspace{1pt} 
-    \small{Chinese Name: 肖有为} \\
-    % \scshape sets small capital letters, remove if desired
+    \textbf{\Huge {Youwei Xiao}} \\ \vspace{1pt}
+    \small{Chinese Name: {肖有为}} \\
     \small{+86 185 1920 4005} \\
-    \href{mailto:shallwe@pku.edu.cn}{\underline{shallwe@pku.edu.cn}}\\
-%     % Be sure to use a professional *personal* email address
-%     % \href{https://www.linkedin.com/in/charles-rambo/}{\underline{linkedin.com/in/charles-rambo}} \\
-%     % you should adjust you linked in profile name to be professional and recognizable
-%     % \href{https://github.com/fizixmastr}{\underline{github.com/fizixmastr}}
+    \href{mailto:shallwe@pku.edu.cn}{\underline{shallwe@pku.edu.cn}} $|$
+    \href{https://uv-xiao.github.io}{\underline{uv-xiao.github.io}} $|$
+    \href{https://github.com/uv-xiao}{\underline{GitHub}}
 \end{center}
 
 
@@ -198,11 +197,8 @@ information though). Whatever order you choose be consistent throughout.
       {{Bachelor of Science degree in Computer Science}}{September 2018 - July 2022}
       {School of Electronics Engineering and Computer Science, Peking University}{Beijing, China}
     \CVSubheading
-      {{Ph.D. Candidate in Integrated Circuit Science and Engineering}}{September 2022 - now}
+      {{Ph.D. Candidate in EDA}}{September 2022 - now}
       {School of Integrated Circuits, Peking University}{Beijing, China}
-      \CVItemListStart
-      \CVItem{Course of study: Data Stream Algorithms, \ Analysis and design of Digital VLSI, \ Analysis and design of Digital VLSI (practice), \ Design Automation and Computing System, \ Algorithms for Engineering in Integrated Circuits, \ Design and Research Exploration for Advanced Chip Architectures}
-      \CVItemListEnd
       % \CVItemListStart
       %   \CVItem{Relevant Coursework and Scores: Introduction to Computing(A)(Honor Track)(97/100), \ Practice of Programming in C\&C++(96/100), \ Introduction to Artificial Intelligence(88/100), \ Data Structure and Algorithm(A)(90/100), \ Introduction to Computer System(91/100),\ Practice of Data Structure and Algorithm(96/100), \ Algorithm Design and Analysis(86/100), \ Machine Learning(87/100), \ Computer Architectures(91/100), \ Lab on Computer Organization and Architecture(99/100), \ Principles of Compilers(91/100)}
       % \CVItemListEnd
@@ -213,55 +209,88 @@ information though). Whatever order you choose be consistent throughout.
 
 \section{Research}
 
-My research focus encompasses computer architecture and hardware-software interfaces. I specialize in developing methodologies that harness software techniques, such as programming languages, compilers, and program analysis, to facilitate the design of efficient domain-specific computing systems.
+My research focuses on software techniques for MLSys, computer architecture, and EDA, with emphasis on domain-specific languages (DSLs) and compiler techniques.
+
+\smallskip
+\noindent\textbf{Hardware Synthesis \& EDA:} I develop multi-level intermediate representations and synthesis tools that bridge high-level specifications and RTL implementations. Key contributions include \textit{Cement} (FPGA '24), a cycle-deterministic embedded HDL in Rust, and \textit{Hector} (ICCAD '22), an MLIR-based multi-level IR for hardware synthesis. I also explore e-graph techniques for hardware optimization in the \textit{SkyEgg} project.
+
+\smallskip
+\noindent\textbf{Computer Architecture:} I work on automated generation of domain-specific accelerators and custom instructions. \textit{Cayman} (DAC '25) combines application profiling with design space exploration for accelerator generation. \textit{ISAMORE} (ASPLOS '26) uses e-graph anti-unification to find reusable custom instructions.
+
+\smallskip
+\noindent\textbf{Hardware-Software Co-Design:} I lead the \textit{APS} project (ICCAD '25 Invited), an open-source framework that generates optimized processor architectures, RTL implementations, and compiler support from target applications---towards fully automated co-design without manual intervention.
+
+\smallskip
+\noindent\textbf{ML Compilers \& Systems:} I am actively researching tensor compiler optimization, distributed compilation, mega-kernel compilation, and LLM inference optimization including KV-Cache management for agentic AI infrastructure.
 
 
 \section{Publications}
 
 \CVItemListStart
+\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026 (to appear). Finding Reusable Instructions via E-Graph Anti-Unification. In Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '26).}
+\CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). [Invited Paper]}
+\CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). (*Equal contribution)}
 \CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. In Proceedings of the 62nd ACM/IEEE Design Automation Conference (DAC '25).}
-\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. In 5th Workshop on Languages, Tools, and Techniques for Accelerator Design (LATTE’25).
-}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. In 5th Workshop on Languages, Tools, and Techniques for Accelerator Design (LATTE '25).}
 \CVItem{Fan Cui, \textbf{Youwei Xiao}, Kexing Zhou, and Yun Liang. 2025. An Empirical Comparison of LLM-based Hardware Design and High-level Synthesis. In Proceedings of the 2025 ACM/SIGDA International Symposium on Field Programmable Gate Arrays (FPGA '25).}
 \CVItem{Fan Cui, Chenyang Yin, Kexing Zhou, \textbf{Youwei Xiao}, Guangyu Sun, Qiang Xu, Qipeng Guo, Yun Liang, Xingcheng Zhang, Demin Song, and Dahua Lin. 2024. OriGen: Enhancing RTL Code Generation with Code-to-Code Augmentation and Self-Reflection. In Proceedings of the 43rd IEEE/ACM International Conference on Computer-Aided Design (ICCAD '24).}
-\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Kexing Zhou, and Yun Liang. 2024. Cement: Streamlining FPGA Hardware Design with Cycle-Deterministic eHDL and Synthesis. In Proceedings of the 2024 ACM/SIGDA International Symposium on Field Programmable Gate Arrays (FPGA ’24)}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Kexing Zhou, and Yun Liang. 2024. Cement: Streamlining FPGA Hardware Design with Cycle-Deterministic eHDL and Synthesis. In Proceedings of the 2024 ACM/SIGDA International Symposium on Field Programmable Gate Arrays (FPGA '24).}
 \CVItem{Ruifan Xu, \textbf{Youwei Xiao}, Jin Luo, and Yun Liang. 2022. HECTOR: A Multi-Level Intermediate Representation for Hardware Synthesis Methodologies. In Proceedings of the 41st IEEE/ACM International Conference on Computer-Aided Design (ICCAD '22).}
+\CVItemListEnd
+
+\section{Preprints}
+
+\CVItemListStart
+\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. arXiv:2511.22267.}
+\CVItem{\textbf{Youwei Xiao}, Yuyang Zou, and Yun Liang. SkyEgg: Joint Implementation Selection and Scheduling for Hardware Synthesis using E-graphs. arXiv:2511.15323.}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Weijie Peng, Yuyang Zou, and Yun Liang. Cement2: Temporal Hardware Transactions for High-Level and Efficient FPGA Programming. arXiv:2511.15073.}
 \CVItemListEnd
 
 
 
 %-----HONORS AND AWARDS--------------------------------------------------------
-% \section{Honors and Awards}
-%   \CVSubHeadingListStart
-% %    \CVSubheading %Example
-% %      {What}{When}
-% %      {Short Description}{}
-%     \CVSubheading
-%       {Merit Student}{2018-2019 \& 2019-2020}
-%       {Awarded to 10\% students for their great comprehensive score}{}
-%     \CVSubheading
-%       {Yang Fuqing \& Wang Yangyuan Academician Scholarship}{2018-2019 }
-%       {Awarded to only 5 students at EECS, Peking University, for academic excellence}{}
-%     % \CVSubheading
-%     %   {Merit Student}{2019-2020 }
-%     %   {Awarded to 10\% students for their great comprehensive score}{}
-%     \CVSubheading
-%       {Shenzhen Stock Exchange Scholarship}{2019-2020 }
-%       {Awarded to 17 students from EECS, Peking University}{}
-%     % \CVSubheading
-%     %   {Second Place in EDAthon 2020}{August 2020}
-%     %   {Programming Competition on Electronic Design Automation}{IEEE CEDA Hong Kong Chapter}
-%     % \CVSubheading
-%     %   {Third Prize in APMCM 2020}{November 2020}
-%     %   {Asia and Pacific Mathematical Contest in Modeling}{APMCP Organizing Commitee}
-%     % \CVSubheading
-%     %   {Second Prize in NOI 2017}{July 2017}
-%     %   {National Olympiad in Informatics}{China Computer Federation}
-%     % \CVSubheading
-%     %   {Second Prize in APIO 2017}{May 2017}
-%     %   {Asia Pacific Informatics Olympaid(China District)}{China Computer Federation}
-%   \CVSubHeadingListEnd
-  
+\section{Honors and Awards}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {Second Place in EDAthon 2020}{August 2020}
+      {Programming Competition on Electronic Design Automation}{IEEE CEDA Hong Kong Chapter}
+    \CVSubheading
+      {Shenzhen Stock Exchange Scholarship}{2019-2020}
+      {Awarded to 17 students from EECS, Peking University}{}
+    \CVSubheading
+      {Merit Student}{2018-2019 \& 2019-2020}
+      {Awarded to top 10\% students for comprehensive excellence}{}    
+    \CVSubheading
+      {Yang Fuqing \& Wang Yangyuan Academician Scholarship}{2018-2019}
+      {Awarded to only 5 students at EECS, Peking University, for academic excellence}{}
+    \CVSubheading
+      {Second Prize in NOI 2017}{July 2017}
+      {National Olympiad in Informatics}{China Computer Federation}
+    \CVSubheading
+      {Second Prize in APIO 2017}{May 2017}
+      {Asia Pacific Informatics Olympiad (China District)}{China Computer Federation}
+  \CVSubHeadingListEnd
+
+%-----TUTORIALS----------------------------------------------------------------
+\section{Tutorials}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {APS: An MLIR-Based Hardware-Software Co-design Framework}{January 2026}
+      {ASP-DAC 2026}{Tokyo, Japan}
+    \CVSubheading
+      {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{May 2025}
+      {ISEDA 2025}{Xi'an, China}
+    \CVSubheading
+      {Agile Hardware Specialization (AHS): A toolbox for Agile Chip Front-end Design}{March 2025}
+      {ASPLOS 2025}{Rotterdam, Netherlands}
+    \CVSubheading
+      {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{March 2025}
+      {DATE 2025}{Lyon, France}
+    \CVSubheading
+      {AHS: An EDA toolbox for Agile Chip Front-end Design}{January 2025}
+      {ASP-DAC 2025}{Tokyo, Japan}
+  \CVSubHeadingListEnd
+
 %-----WORK EXPERIENCE----------------------------------------------------------
 \begin{comment}
 try to briefly explain what you did and why it is relevant to the position you
@@ -288,27 +317,15 @@ are seeking
 %   \CVSubHeadingListEnd
 
 %-----TEACHING EXPERIENCE------------------------------------------------------
-% \begin{comment}
-% Section is here as it applied to my application for positions in academia. 
-% Remember to tailor the resume for to the position.
-% \end{comment}
-
-\section{Teaching Experience}
-  \CVSubHeadingListStart
-%    \CVSubheading
-%      {What}{When}
-%      {School}{Where}
-    \CVSubheading
-      {Teaching Assitant}{Fall 2020}
-      {Introduction to Computer Systems}{Peking University}
-      % \CVItemListStart
-      %   \CVItem{Host the discussion class every week, summarizing key points of each lecture}
-      %   \CVItem{Helped 13 students to finish  8 course labs, and graded their assignments }
-      % \CVItemListEnd
-    \CVSubheading
-      {Teaching Assitant}{Spring 2022 \& Fall 2022}
-      {High-level Chip Design}{Peking University}
-  \CVSubHeadingListEnd
+% \section{Teaching Experience}
+%   \CVSubHeadingListStart
+%     \CVSubheading
+%       {Teaching Assistant}{Fall 2020}
+%       {Introduction to Computer Systems}{Peking University}
+%     \CVSubheading
+%       {Teaching Assistant}{Spring 2022 \& Fall 2022}
+%       {High-level Chip Design}{Peking University}
+%   \CVSubHeadingListEnd
   
 % %-----PROJECTS AND RESEARCH----------------------------------------------------
 % \begin{comment}
@@ -317,42 +334,27 @@ are seeking
 % use item list as is shown in the work experience section.
 % \end{comment}
 
-% \section{Projects and Research}
-%   \CVSubHeadingListStart
-% %    \CVSubheading
-% %      {Title of Work}{When it was done}
-% %      {Institution you worked with}{unused}
-%     \CVSubheading
-%       {{Keyword-related Document Retrieval Based on NSF data $|$ \emph{\small{C++}}}} {Fall 2018}
-%       {Course Project of Introduction to Computing(A)(Honor Track) }{}
-%     \CVSubheading
-%       {{MCTS-based AI Program that Plays Game of the Amazons $|$ \emph{\small{C++}}}}{Spring 2019}
-%       {Course Project of Introduction to Artificial Intelligence}{}
-%     \CVSubheading
-%       {{Blockchain-based Crowdsourced Data Annotation Platform $|$ \emph{\small{Solidity, Python}}}}{Spring 2020}
-%       {Course Project of Algorithm Design and Analysis}{}
-%     \CVSubheading
-%       {Parallel Implementation of Hines Algorithm Based on OpenMP $|$ \emph{\small{C}}}{Spring 2020}
-%       {Course Project of Introduction to Parallel and Distributed Computing}{}
-%     \CVSubheading
-%       {{RoBERTa-based Refined Model for Tweet Sentiment Extraction } $|$ \emph{\small{Python, TensorFlow}}}{Summer 2020}
-%       {Bronze Prize in the Kaggle Competition, Couse Project of Machine Learning}{}
-%     \CVSubheading
-%       {{Chating App implemented with JavaFx, Netty and SQLite} $|$ \emph{\small{Java}}}{Summer 2020}
-%       {Course Project of Java Programming}{}
-%     \CVSubheading
-%       {{Branch Prediction and  Standard Instrument Extension on Tinyriscv Processor}  $|$ \emph{\small{Verilog}}}{Fall 2020}
-%       {Course Project of Lab on Computer Organization and Architecture}{}
-%     \CVSubheading
-%       {{FPGA-based CNN Accelerator by Vivado HLS}  $|$ \emph{\small{C++}} }{Fall 2020}
-%       {Course Project of Lab on Computer Organization and Architecture}{}
-%     % \CVSubheading
-%     %   {Survey for Qubit Mapping}{Febrary 2021}
-%     %   {Summarize several exact or heauristic algorithms for qubit mapping problem}{}
-%     % \CVSubheading
-%     %   {{Parallel Pattern based High Level Synthesis for sparse tensor computation}}{Ongoing}
-%     %   {} {}
-%   \CVSubHeadingListEnd
+\section{Projects and Research}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {APS: Agile Processor Specialization}{2023 -- Present}
+      {Open-source framework for automated processor specialization from applications to RTL}{\href{https://github.com/pku-liang/APS}{GitHub}}
+    \CVSubheading
+      {Cement: Cycle-Deterministic eHDL}{2022 -- Present}
+      {Embedded HDL in Rust with temporal transactions for FPGA design}{\href{https://github.com/pku-liang/Cement}{GitHub}}
+    \CVSubheading
+      {Hector: Multi-Level Hardware IR}{2021 -- 2022}
+      {MLIR-based multi-level intermediate representation for hardware synthesis}{\href{https://github.com/pku-liang/Hector}{GitHub}}
+    \CVSubheading
+      {ISAMORE: Instruction Reuse via E-Graphs}{2024 -- 2025}
+      {E-graph anti-unification for finding reusable custom instructions}{}
+    \CVSubheading
+      {Cayman: Custom Accelerator Generation}{2024 -- 2025}
+      {Accelerator generation with control flow and data access optimization}{}
+    \CVSubheading
+      {SkyEgg: Hardware Synthesis with E-Graphs}{2024 -- Present}
+      {Joint implementation selection and scheduling using e-graphs}{}
+  \CVSubHeadingListEnd
 
 %-----CONFERENCES AND PRESENTATIONS--------------------------------------------
 % \begin{comment}
@@ -393,26 +395,18 @@ are seeking
 %       {Helping to reestablish homeless persons in the community}{Austin, TX}
 %   \CVSubHeadingListEnd
 
-% %-----SKILLS-------------------------------------------------------------------
-% \begin{comment}
-% This section is compressed from the various skills sections that Euro CV
-% recommends.
-% \end{comment}
-
-% \section{Skills}
-%  \begin{itemize}[leftmargin=0.5cm, label={}]
-%     \small{\item{
-%     %  \textbf{Languages}{: English (Native), Spanish (B1), Finnish (A1)} \\
-%      \textbf{Programming}{: C, C++, Java, Python, Pytorch, Scala, Verilog} \\
-%      \textbf{Tools}{: Vivado HLS, Git}\\
-%      \textbf{Document Creation}{: Microsoft Office Suite, LaTex, Markdown} \\
-%      \textbf{Language}{: Chinese(native), English(trying hard to improve)}
-%     }}
-%  \end{itemize}
+%-----SKILLS-------------------------------------------------------------------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.5cm, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: Rust, C++, Python, Scala, Verilog, CUDA} \\
+     \textbf{Compiler Infrastructure}{: MLIR, LLVM} \\
+     \textbf{ML Frameworks}{: PyTorch, Tilelang}
+    }}
+ \end{itemize}
     
 %-----RESEARCH INTERESTS----------------------------------------------------------------
 
 % \section{Research Interests}
-% Currently, I’m working on the development of our own high-level synthesis flow, we plan to run through the flow, try more optimization passes and do experiments. I have a greatly strong willingness to build the next-generation open-source high-level synthesis tool, which is able to beat commercial HLS tools in broad application domains. I’m going to design multilevel IRs to support a variety of optimizations, try to integrate current frontier techniques for reference and explore brand new analysis and optimization methods
-\end{CJK*}
+% Currently, I'm working on the development of our own high-level synthesis flow, we plan to run through the flow, try more optimization passes and do experiments. I have a greatly strong willingness to build the next-generation open-source high-level synthesis tool, which is able to beat commercial HLS tools in broad application domains. I'm going to design multilevel IRs to support a variety of optimizations, try to integrate current frontier techniques for reference and explore brand new analysis and optimization methods
 \end{document}
