@@ -1,8 +1,9 @@
 # Makefile for CV compilation
-# Requires: texlive-full or texlive with luatexja
+# Uses XeLaTeX for reliable CJK support on macOS
 
 MAIN = CV
 OUTPUT_DIR = ../assets/pdf
+ENGINE ?= xelatex
 
 .PHONY: all clean watch
 
@@ -10,13 +11,13 @@ all: $(OUTPUT_DIR)/$(MAIN).pdf
 
 $(OUTPUT_DIR)/$(MAIN).pdf: $(MAIN).tex
 	@mkdir -p $(OUTPUT_DIR)
-	lualatex -interaction=nonstopmode $(MAIN).tex
-	lualatex -interaction=nonstopmode $(MAIN).tex
+	$(ENGINE) -interaction=nonstopmode $(MAIN).tex
+	$(ENGINE) -interaction=nonstopmode $(MAIN).tex
 	mv $(MAIN).pdf $(OUTPUT_DIR)/
 
 # Quick build without moving
 quick:
-	lualatex -interaction=nonstopmode $(MAIN).tex
+	$(ENGINE) -interaction=nonstopmode $(MAIN).tex
 
 # Watch for changes (requires inotify-tools)
 watch:

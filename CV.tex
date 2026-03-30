@@ -8,11 +8,21 @@
 
 % \documentclass[A4,11pt]{article}
 \documentclass[letterpaper,11pt]{article} %For use in US
-% Use LuaLaTeX for proper bold + CJK support
-\usepackage{fontspec}
-\setmainfont{Latin Modern Roman}
-\usepackage{luatexja-fontspec}
-\setmainjfont{AR PL UMing CN}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \setmainfont{Times New Roman}
+  \usepackage{xeCJK}
+  \setCJKmainfont{Hiragino Sans GB}
+\else\ifLuaTeX
+  \usepackage{fontspec}
+  \setmainfont{Latin Modern Roman}
+  \usepackage{luatexja-fontspec}
+  \setmainjfont{AR PL UMing CN}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi\fi
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
@@ -215,19 +225,19 @@ My research focuses on software techniques for MLSys, computer architecture, and
 \noindent\textbf{Hardware Synthesis \& EDA:} I develop multi-level intermediate representations and synthesis tools that bridge high-level specifications and RTL implementations. Key contributions include \textit{Cement} (FPGA '24), a cycle-deterministic embedded HDL in Rust, and \textit{Hector} (ICCAD '22), an MLIR-based multi-level IR for hardware synthesis. I also explore e-graph techniques for hardware optimization in the \textit{SkyEgg} project.
 
 \smallskip
-\noindent\textbf{Computer Architecture:} I work on automated generation of domain-specific accelerators and custom instructions. \textit{Cayman} (DAC '25) combines application profiling with design space exploration for accelerator generation. \textit{ISAMORE} (ASPLOS '26) uses e-graph anti-unification to find reusable custom instructions.
+\noindent\textbf{Computer Architecture:} I work on automated generation of domain-specific accelerators and custom instructions. \textit{Cayman} (DAC '25) combines application profiling with design space exploration for accelerator generation. \textit{ISAMORE} (ASPLOS '26 Best Paper Award, 5/1048) uses e-graph anti-unification to find reusable custom instructions.
 
 \smallskip
 \noindent\textbf{Hardware-Software Co-Design:} I lead the \textit{APS} project (ICCAD '25 Invited), an open-source framework that generates optimized processor architectures, RTL implementations, and compiler support from target applications---towards fully automated co-design without manual intervention.
 
 \smallskip
-\noindent\textbf{ML Compilers \& Systems:} I am actively researching tensor compiler optimization, distributed compilation, mega-kernel compilation, and LLM inference optimization including KV-Cache management for agentic AI infrastructure.
+\noindent\textbf{ML Compilers \& Systems:} I am actively researching retargetable tensor compilers, distributed tensor compilation and runtime systems, agentic superoptimization with LLM-driven equality saturation, and inference infrastructure for multi-agent systems.
 
 
 \section{Publications}
 
 \CVItemListStart
-\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026 (to appear). Finding Reusable Instructions via E-Graph Anti-Unification. In Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '26).}
+\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. In Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '26). [Best Paper Award, 5/1048]}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). [Invited Paper]}
 \CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). (*Equal contribution)}
 \CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. In Proceedings of the 62nd ACM/IEEE Design Automation Conference (DAC '25).}
@@ -251,6 +261,9 @@ My research focuses on software techniques for MLSys, computer architecture, and
 %-----HONORS AND AWARDS--------------------------------------------------------
 \section{Honors and Awards}
   \CVSubHeadingListStart
+    \CVSubheading
+      {ASPLOS 2026 Best Paper Award}{March 2026}
+      {Finding Reusable Instructions via E-Graph Anti-Unification}{5/1048 submissions}
     \CVSubheading
       {Second Place in EDAthon 2020}{August 2020}
       {Programming Competition on Electronic Design Automation}{IEEE CEDA Hong Kong Chapter}
@@ -346,14 +359,26 @@ are seeking
       {Hector: Multi-Level Hardware IR}{2021 -- 2022}
       {MLIR-based multi-level intermediate representation for hardware synthesis}{\href{https://github.com/pku-liang/Hector}{GitHub}}
     \CVSubheading
-      {ISAMORE: Instruction Reuse via E-Graphs}{2024 -- 2025}
-      {E-graph anti-unification for finding reusable custom instructions}{}
+      {ISAMORE: Instruction Reuse via E-Graphs}{2025 -- Present}
+      {E-graph anti-unification for reusable custom instructions; ASPLOS 2026 Best Paper Award (5/1048)}{}
     \CVSubheading
       {Cayman: Custom Accelerator Generation}{2024 -- 2025}
       {Accelerator generation with control flow and data access optimization}{}
     \CVSubheading
       {SkyEgg: Hardware Synthesis with E-Graphs}{2024 -- Present}
       {Joint implementation selection and scheduling using e-graphs}{}
+    \CVSubheading
+      {Retargetable Tensor Compilers and Superoptimizers}{2025 -- Present}
+      {Compiler infrastructure and superoptimization targeting NVIDIA, Qualcomm Hexagon, and Huawei Ascend}{\href{https://github.com/uv-xiao/htp}{GitHub}}
+    \CVSubheading
+      {PTO Runtime}{2025 -- Present}
+      {Distributed tensor compilation and runtime system for large-scale workloads}{\href{https://github.com/hw-native-sys/simpler}{GitHub}}
+    \CVSubheading
+      {EggMind: Agentic Superoptimizer}{2025 -- Present}
+      {LLM-driven equality saturation for agentic superoptimization}{\href{https://openreview.net/forum?id=5jY9ryobP7}{OpenReview}}
+    \CVSubheading
+      {Multi-Agent Inference Infrastructure}{2025 -- Present}
+      {Programming surface and control layers for multi-agent systems}{}
   \CVSubHeadingListEnd
 
 %-----CONFERENCES AND PRESENTATIONS--------------------------------------------
@@ -401,7 +426,7 @@ are seeking
     \small{\item{
      \textbf{Programming Languages}{: Rust, C++, Python, Scala, Verilog, CUDA} \\
      \textbf{Compiler Infrastructure}{: MLIR, LLVM} \\
-     \textbf{ML Frameworks}{: PyTorch, Tilelang}
+     \textbf{ML Frameworks}{: PyTorch, Tilelang, Triton}
     }}
  \end{itemize}
     
