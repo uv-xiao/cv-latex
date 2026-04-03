@@ -34,6 +34,7 @@
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \usepackage{tikz}
+\usepackage{xcolor}
 % \input{glyphtounicode} % pdfTeX only, not needed for LuaLaTeX
 
 \begin{comment}
@@ -118,6 +119,7 @@ strokes, sans-serif fonts are sans (without) these strokes.
 }
 
 \newcommand{\CVSubItem}[1]{\CVItem{#1}\vspace{-4pt}}
+\newcommand{\ContactLink}[2]{\href{#1}{\underline{\strut #2}}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
@@ -166,9 +168,9 @@ which heading appropriate for the document you are creating.
     \textbf{\Huge {Youwei Xiao}} \\ \vspace{1pt}
     \small{Chinese Name: {肖有为}} \\
     \small{+86 185 1920 4005} \\
-    \href{mailto:shallwe@pku.edu.cn}{\underline{shallwe@pku.edu.cn}} $|$
-    \href{https://uv-xiao.github.io}{\underline{uv-xiao.github.io}} $|$
-    \href{https://github.com/uv-xiao}{\underline{GitHub}}
+    \small{\ContactLink{mailto:shallwe@pku.edu.cn}{shallwe@pku.edu.cn} \enspace\textbar\enspace
+    \ContactLink{https://uv-xiao.github.io}{uv-xiao.github.io} \enspace\textbar\enspace
+    \ContactLink{https://github.com/uv-xiao}{GitHub}}
 \end{center}
 
 
@@ -219,25 +221,25 @@ information though). Whatever order you choose be consistent throughout.
 
 \section{Research}
 
-My research focuses on software techniques for MLSys, computer architecture, and EDA, with emphasis on domain-specific languages (DSLs) and compiler techniques.
+My research centers on compiler techniques for MLSys, computer architecture, and EDA, with emphasis on domain-specific languages, intermediate representations, and program optimization.
 
 \smallskip
-\noindent\textbf{Hardware Synthesis \& EDA:} I develop multi-level intermediate representations and synthesis tools that bridge high-level specifications and RTL implementations. Key contributions include \textit{Cement} (FPGA '24), a cycle-deterministic embedded HDL in Rust, and \textit{Hector} (ICCAD '22), an MLIR-based multi-level IR for hardware synthesis. I also explore e-graph techniques for hardware optimization in the \textit{SkyEgg} project.
+\noindent\textbf{Hardware Synthesis \& EDA:} I develop compiler infrastructures, multi-level intermediate representations, and synthesis methods that bridge high-level specifications and RTL implementations. Key contributions include \textit{Cement} (FPGA '24), a cycle-deterministic embedded HDL in Rust, and \textit{Hector} (ICCAD '22), an MLIR-based multi-level IR for hardware synthesis. I also explore e-graph techniques for hardware optimization in the \textit{SkyEgg} project.
 
 \smallskip
-\noindent\textbf{Computer Architecture:} I work on automated generation of domain-specific accelerators and custom instructions. \textit{Cayman} (DAC '25) combines application profiling with design space exploration for accelerator generation. \textit{ISAMORE} (ASPLOS '26 Best Paper Award, 5/1048) uses e-graph anti-unification to find reusable custom instructions.
+\noindent\textbf{Computer Architecture:} I work on compiler-guided generation of domain-specific accelerators and reusable custom instructions. \textit{Cayman} (DAC '25) combines application profiling with design space exploration for accelerator generation. \textit{ISAMORE} (ASPLOS '26 Best Paper Award, 5/1048) uses e-graph anti-unification to find reusable custom instructions.
 
 \smallskip
-\noindent\textbf{Hardware-Software Co-Design:} I lead the \textit{APS} project (ICCAD '25 Invited), an open-source framework that generates optimized processor architectures, RTL implementations, and compiler support from target applications---towards fully automated co-design without manual intervention.
+\noindent\textbf{Hardware-Software Co-Design:} I lead the \textit{APS} project (ICCAD '25 Invited), a compiler-centered framework that generates optimized processor architectures, RTL implementations, and compiler support from target applications---towards fully automated co-design without manual intervention.
 
 \smallskip
-\noindent\textbf{ML Compilers \& Systems:} I am actively researching retargetable tensor compilers, distributed tensor compilation and runtime systems, agentic superoptimization with LLM-driven equality saturation, and inference infrastructure for multi-agent systems.
+\noindent\textbf{ML Compilers \& Systems:} I am actively researching compiler-centric ML systems including human- and LLM-friendly retargetable tensor compilers (\textit{HTP}), task-graph runtimes for distributed tensor execution (\textit{PTO Runtime}), execution-guided superoptimization (\textit{EggMind}), and explicit orchestration substrates for multi-agent systems (\textit{Hive}).
 
 
 \section{Publications}
 
 \CVItemListStart
-\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. In Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '26). [Best Paper Award, 5/1048]}
+\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. In Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '26). \textbf{\textcolor{red}{[Best Paper Award, 5/1048]}}}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). [Invited Paper]}
 \CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. In Proceedings of the 44th IEEE/ACM International Conference on Computer-Aided Design (ICCAD '25). (*Equal contribution)}
 \CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. In Proceedings of the 62nd ACM/IEEE Design Automation Conference (DAC '25).}
@@ -294,7 +296,7 @@ My research focuses on software techniques for MLSys, computer architecture, and
       {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{May 2025}
       {ISEDA 2025}{Xi'an, China}
     \CVSubheading
-      {Agile Hardware Specialization (AHS): A toolbox for Agile Chip Front-end Design}{March 2025}
+      {Agile Hardware Specialization (AHS)}{March 2025}
       {ASPLOS 2025}{Rotterdam, Netherlands}
     \CVSubheading
       {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{March 2025}
@@ -368,17 +370,17 @@ are seeking
       {SkyEgg: Hardware Synthesis with E-Graphs}{2024 -- Present}
       {Joint implementation selection and scheduling using e-graphs}{}
     \CVSubheading
-      {Retargetable Tensor Compilers and Superoptimizers}{2025 -- Present}
-      {Compiler infrastructure and superoptimization targeting NVIDIA, Qualcomm Hexagon, and Huawei Ascend}{\href{https://github.com/uv-xiao/htp}{GitHub}}
+      {HTP}{2025 -- Present}
+      {Human- and LLM-friendly retargetable compiler substrate with inspectable IRs}{\href{https://github.com/uv-xiao/htp}{GitHub}}
     \CVSubheading
       {PTO Runtime}{2025 -- Present}
-      {Distributed tensor compilation and runtime system for large-scale workloads}{\href{https://github.com/hw-native-sys/simpler}{GitHub}}
+      {Task-graph runtime for distributed tensor compilation and host-device execution}{\href{https://github.com/uv-xiao/pto-runtime}{GitHub}}
     \CVSubheading
       {EggMind: Agentic Superoptimizer}{2025 -- Present}
-      {LLM-driven equality saturation for agentic superoptimization}{\href{https://openreview.net/forum?id=5jY9ryobP7}{OpenReview}}
+      {Execution-guided agentic superoptimizer with bounded search for scalable equality saturation}{\href{https://openreview.net/forum?id=5jY9ryobP7}{OpenReview}}
     \CVSubheading
-      {Multi-Agent Inference Infrastructure}{2025 -- Present}
-      {Programming surface and control layers for multi-agent systems}{}
+      {Hive}{2025 -- Present}
+      {Explicit orchestration substrate for programmable multi-agent systems}{\href{https://github.com/veri-smart/hive}{GitHub}}
   \CVSubHeadingListEnd
 
 %-----CONFERENCES AND PRESENTATIONS--------------------------------------------

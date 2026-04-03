@@ -15,9 +15,11 @@ $(OUTPUT_DIR)/$(MAIN).pdf: $(MAIN).tex
 	$(ENGINE) -interaction=nonstopmode $(MAIN).tex
 	mv $(MAIN).pdf $(OUTPUT_DIR)/
 
-# Quick build without moving
+# Quick build and refresh the canonical PDF in assets/pdf
 quick:
+	@mkdir -p $(OUTPUT_DIR)
 	$(ENGINE) -interaction=nonstopmode $(MAIN).tex
+	mv $(MAIN).pdf $(OUTPUT_DIR)/
 
 # Watch for changes (requires inotify-tools)
 watch:
