@@ -13,7 +13,11 @@
   \usepackage{fontspec}
   \setmainfont{Times New Roman}
   \usepackage{xeCJK}
-  \setCJKmainfont{Hiragino Sans GB}
+  \IfFontExistsTF{Hiragino Sans GB}
+    {\setCJKmainfont{Hiragino Sans GB}}
+    {\IfFontExistsTF{Noto Sans CJK SC}
+      {\setCJKmainfont{Noto Sans CJK SC}}
+      {\setCJKmainfont{WenQuanYi Zen Hei}}}
 \else\ifLuaTeX
   \usepackage{fontspec}
   \setmainfont{Latin Modern Roman}
@@ -233,7 +237,7 @@ My research centers on compiler techniques for MLSys, computer architecture, and
 \noindent\textbf{Hardware-Software Co-Design:} I lead the \textit{APS} project (ICCAD '25 Invited), a compiler-centered framework that generates optimized processor architectures, RTL implementations, and compiler support from target applications---towards fully automated co-design without manual intervention.
 
 \smallskip
-\noindent\textbf{ML Compilers \& Systems:} I am actively researching compiler-centric ML systems including human- and LLM-friendly retargetable tensor compilers (\textit{HTP}), task-graph runtimes for distributed tensor execution (\textit{PTO Runtime}), execution-guided superoptimization (\textit{EggMind}), and explicit orchestration substrates for multi-agent systems (\textit{Hive}).
+\noindent\textbf{ML Compilers \& Systems:} I am actively researching compiler-centric ML systems including human- and LLM-friendly intelligent compiler infrastructure (\textit{IntelliC}), task-graph runtimes for distributed tensor execution (\textit{PTO Runtime}), LLM-guided strategy synthesis for equality saturation (\textit{EggMind}), and inference infrastructure for multi-agent systems (\textit{Hive}).
 
 
 \section{Publications}
@@ -253,6 +257,8 @@ My research centers on compiler techniques for MLSys, computer architecture, and
 \section{Preprints}
 
 \CVItemListStart
+\CVItem{Chenyun Yin, \textbf{Youwei Xiao}, Yuze Luo, Yuyang Zou, and Yun Liang. LLM-Guided Strategy Synthesis for Scalable Equality Saturation. arXiv:2604.17364.}
+\CVItem{Zizhang Luo, Yuhao Luo, \textbf{Youwei Xiao}, Yansong Xu, Runlin Guo, and Yun Liang. Hive: A Multi-Agent Infrastructure for Algorithm- and Task-Level Scaling. arXiv:2604.17353.}
 \CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. arXiv:2511.22267.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, and Yun Liang. SkyEgg: Joint Implementation Selection and Scheduling for Hardware Synthesis using E-graphs. arXiv:2511.15323.}
 \CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Weijie Peng, Yuyang Zou, and Yun Liang. Cement2: Temporal Hardware Transactions for High-Level and Efficient FPGA Programming. arXiv:2511.15073.}
@@ -370,17 +376,17 @@ are seeking
       {SkyEgg: Hardware Synthesis with E-Graphs}{2024 -- Present}
       {Joint implementation selection and scheduling using e-graphs}{}
     \CVSubheading
-      {HTP}{2025 -- Present}
-      {Human- and LLM-friendly retargetable compiler substrate with inspectable IRs}{\href{https://github.com/uv-xiao/htp}{GitHub}}
+      {IntelliC}{2025 -- Present}
+      {Human- and LLM-friendly intelligent compiler infrastructure with inspectable representations}{\href{https://github.com/uv-xiao/IntelliC}{GitHub}}
     \CVSubheading
       {PTO Runtime}{2025 -- Present}
       {Task-graph runtime for distributed tensor compilation and host-device execution}{\href{https://github.com/uv-xiao/pto-runtime}{GitHub}}
     \CVSubheading
       {EggMind: Agentic Superoptimizer}{2025 -- Present}
-      {Execution-guided agentic superoptimizer with bounded search for scalable equality saturation}{\href{https://openreview.net/forum?id=5jY9ryobP7}{OpenReview}}
+      {LLM-guided strategy synthesis for scalable equality saturation}{\href{https://arxiv.org/abs/2604.17364}{arXiv}}
     \CVSubheading
       {Hive}{2025 -- Present}
-      {Explicit orchestration substrate for programmable multi-agent systems}{\href{https://github.com/veri-smart/hive}{GitHub}}
+      {Multi-agent infrastructure for algorithm- and task-level scaling}{\href{https://arxiv.org/abs/2604.17353}{arXiv}}
   \CVSubHeadingListEnd
 
 %-----CONFERENCES AND PRESENTATIONS--------------------------------------------
