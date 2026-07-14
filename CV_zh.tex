@@ -1,0 +1,287 @@
+%------------------------------------------------------------------------------
+% Chinese CV
+%------------------------------------------------------------------------------
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \setmainfont{Times New Roman}
+  \usepackage{xeCJK}
+  \IfFontExistsTF{Songti SC}
+    {\setCJKmainfont[BoldFont={Songti SC}, BoldFeatures={FakeBold=2}, ItalicFont={Kaiti SC}]{Songti SC}}
+    {\IfFontExistsTF{Noto Serif CJK SC}
+      {\setCJKmainfont{Noto Serif CJK SC}}
+      {\IfFontExistsTF{Hiragino Sans GB}
+        {\setCJKmainfont[BoldFont={Hiragino Sans GB W6}]{Hiragino Sans GB}}
+        {\setCJKmainfont{WenQuanYi Zen Hei}}}}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi
+
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage{xcolor}
+
+\addtolength{\oddsidemargin}{-1cm}
+\addtolength{\evensidemargin}{-1cm}
+\addtolength{\textwidth}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{2cm}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0cm}
+
+\titleformat{\section}{
+  \vspace{-4pt}\bfseries\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\newcommand{\CVItem}[1]{\item\small #1 \vspace{-2pt}}
+\newcommand{\CVSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \small#3 & \small #4 \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\ContactLink}[2]{\href{#1}{\underline{\strut #2}}}
+\newcommand{\DOILink}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\ArxivLink}[1]{\href{https://arxiv.org/abs/#1}{arXiv:#1}}
+\newcommand{\ProjectLink}[2]{\href{#1}{#2}}
+\newcommand{\CVSubHeadingListStart}{\begin{itemize}[leftmargin=0.5cm, label={}]}
+\newcommand{\CVSubHeadingListEnd}{\end{itemize}}
+\newcommand{\CVItemListStart}{\begin{itemize}[leftmargin=0.55cm]}
+\newcommand{\CVItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\ResearchWork}[2]{\textbf{#1}\if\relax\detokenize{#2}\relax\else\ {\scriptsize(#2)}\fi\\[-1pt]}
+
+\newcommand{\ResearchClassBox}[5]{
+  \node[
+    draw=StoryBlue,
+    fill=StoryLight,
+    rounded corners=2pt,
+    text width=3.65cm,
+    minimum height=4.55cm,
+    align=left,
+    inner sep=5pt,
+    anchor=north
+  ] (#1) at (#2,0) {
+    \centering\color{StoryBlue}\textbf{#3}\par
+    \vspace{2pt}
+    \raggedright\scriptsize #4\par
+    \vspace{3pt}
+    #5
+  };
+}
+\newcommand{\ResearchForwardRelation}[5]{
+  \path
+    ([xshift=#3]#1.north) coordinate (forward-start)
+    ([xshift=#4]#2.north) coordinate (forward-end)
+    ([xshift=#3,yshift=0.56cm]#1.north) coordinate (forward-upper-start)
+    ([xshift=#4,yshift=0.56cm]#2.north) coordinate (forward-upper-end);
+  \draw[-{Latex[length=2mm]}, thick, StoryBlue, rounded corners=7pt]
+    (forward-start) -- (forward-upper-start)
+    -- node[midway, fill=white, inner sep=1.5pt, text width=2.45cm, align=center, font=\tiny, text=StoryBlue] {#5}
+    (forward-upper-end) -- (forward-end);
+}
+\newcommand{\ResearchFeedbackRelation}[6]{
+  \path
+    ([xshift=#4]#1.south) coordinate (feedback-start)
+    ([xshift=-#4]#2.south) coordinate (feedback-end)
+    ([xshift=#4,yshift=-#3]#1.south) coordinate (feedback-lower-start)
+    ([xshift=-#4,yshift=-#3]#2.south) coordinate (feedback-lower-end);
+  \draw[-{Latex[length=2mm]}, thick, StoryGreen, rounded corners=7pt]
+    (feedback-start) -- (feedback-lower-start)
+    -- node[midway, fill=white, inner sep=1.5pt, text width=#5, align=center, font=\tiny, text=StoryGreen] {#6}
+    (feedback-lower-end) -- (feedback-end);
+}
+\newcommand{\ResearchStoryDiagram}{
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize]
+  \definecolor{StoryBlue}{HTML}{0B4AA2}
+  \definecolor{StoryLight}{HTML}{EAF1FB}
+  \definecolor{StoryGreen}{HTML}{008C73}
+
+  \ResearchClassBox{arch}{0}{架构定制}
+    {编译与形式化方法，特别是 e-graph，自动化 ISA 定制和编译器适配。}
+    {
+      \ResearchWork{ISAMORE}{\ProjectLink{https://doi.org/10.1145/3779212.3790162}{ASPLOS '26}}
+      \ResearchWork{Cayman}{\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DAC '25}}
+      \ResearchWork{APS / Aquas}{\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{ICCAD '25} + \ProjectLink{https://arxiv.org/abs/2511.22267}{arXiv}}
+    }
+
+  \ResearchClassBox{synth}{5.85}{硬件综合}
+    {多层 IR 和综合 pass 优化时序、微架构、映射与调度。}
+    {
+      \ResearchWork{Hector}{\ProjectLink{https://doi.org/10.1145/3508352.3549370}{ICCAD '22}}
+      \ResearchWork{Cement / Cement2}{\ProjectLink{https://doi.org/10.1145/3626202.3637561}{FPGA '24} + \ProjectLink{https://arxiv.org/abs/2511.15073}{arXiv}}
+      \ResearchWork{Clay}{\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{ICCAD '25}}
+      \ResearchWork{SkyEgg}{\ProjectLink{https://arxiv.org/abs/2511.15323}{arXiv}}
+    }
+
+  \ResearchClassBox{llm}{11.7}{大模型技术}
+    {大模型推进编译与协同设计流程和新芯片算子开发；编译器和运行时系统支撑大模型负载。}
+    {
+      \ResearchWork{EggMind}{\ProjectLink{https://arxiv.org/abs/2604.17364}{arXiv}}
+      \ResearchWork{IntelliC}{\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}}
+      \ResearchWork{Spine}{}
+      \ResearchWork{Kernel Agents}{新芯片}
+      \ResearchWork{PTO Runtime}{\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}}
+      \ResearchWork{Hive}{\ProjectLink{https://arxiv.org/abs/2604.17353}{arXiv}}
+    }
+
+  \ResearchForwardRelation{arch}{synth}{0cm}{-0.95cm}{定制能力\\转化为实现}
+  \ResearchForwardRelation{synth}{llm}{0.95cm}{0cm}{IR/运行时/算子证据\\约束智能体}
+  \ResearchFeedbackRelation{synth}{arch}{0.58cm}{-1.0cm}{2.7cm}{硬件约束指导定制}
+  \ResearchFeedbackRelation{llm}{synth}{0.58cm}{-1.0cm}{2.7cm}{智能体改进综合工具链}
+  \ResearchFeedbackRelation{llm}{arch}{0.84cm}{0.9cm}{3.0cm}{智能体流程演化定制方法}
+\end{tikzpicture}
+}
+\end{center}
+}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge {肖有为}} \\ \vspace{1pt}
+    \small{Youwei Xiao} \\
+    \small{+86 185 1920 4005} \\
+    \small{\ContactLink{mailto:shallwe@pku.edu.cn}{shallwe@pku.edu.cn} \enspace\textbar\enspace
+    \ContactLink{https://uv-xiao.github.io}{uv-xiao.github.io} \enspace\textbar\enspace
+    \ContactLink{https://github.com/uv-xiao}{GitHub}}
+\end{center}
+
+\section{教育经历}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {北京大学集成电路学院，集成电路科学与工程博士研究生}{2022年9月 -- 至今}
+      {导师：梁云教授}{中国北京}
+      \CVItemListStart
+        \CVItem{研究方向：围绕敏捷芯片设计与编译优化的软硬件协同，以及面向新芯片算子开发的创新智能体。}
+      \CVItemListEnd
+    \CVSubheading
+      {北京大学信息科学技术学院，计算机科学与技术理学学士}{2018年9月 -- 2022年7月}
+      {}{中国北京}
+  \CVSubHeadingListEnd
+
+\section{工作经历}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {大语言模型算法实习生}{2026年 -- 至今}
+      {ByteDance Seed}{中国北京}
+      \CVItemListStart
+        \CVItem{构建面向新芯片算子开发的创新智能体。}
+      \CVItemListEnd
+  \CVSubHeadingListEnd
+
+\section{研究方向}
+
+我的研究围绕敏捷芯片设计与编译优化的软硬件协同展开，并进一步探索面向新芯片算子开发的创新智能体。核心问题是：如何把真实软件需求转化为可复用的体系结构能力，将其实现为高质量硬件，并通过可分析、可验证、可复用的编译接口和智能体流程重新暴露给软件栈。
+
+\ResearchStoryDiagram
+
+\smallskip
+\noindent \textbf{架构定制。} 我探索使用编译技术和形式化方法，特别是 e-graph 技术，自动化 ISA 定制和编译器适配。\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 通过对等价程序片段进行反一化来发现可复用自定义指令。\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 从完整应用中发现加速器机会，并同时优化控制流和数据访问。\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 和 \textit{Aquas} (\ProjectLink{https://arxiv.org/abs/2511.22267}{preprint}) 将定制硬件能力连接到可重定向的编译器支持。
+
+\smallskip
+\noindent \textbf{硬件综合。} 我在多个抽象层次创建中间表示，并提出综合优化 pass，用于优化时序、微架构、映射和调度。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 为硬件综合方法提供多层 MLIR 基础设施。\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 和 \textit{Cement2} (\ProjectLink{https://arxiv.org/abs/2511.15073}{preprint}) 将周期时序和时间事务提升为 FPGA 设计的一等抽象。\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI}) 综合微架构感知的 ASIP 指令，\textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 使用 e-graph 联合进行实现选择与调度。
+
+\smallskip
+\noindent \textbf{大模型技术。} 我同时探索大模型用于编译器，以及编译器/系统技术支撑大模型，并构建面向新芯片算子开发的创新智能体。\textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) 使用大模型综合可复用的等式饱和策略。\textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) 研究面向人与智能体协作的可检查编译表示。\textit{Spine} 研究验证有界的智能体协同设计，用类型化语义边界和可执行检查，将设计意图、架构描述、硬件/编译器产物和验证反馈连接成可追踪闭环。\textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) 面向昇腾芯片和灵衢超节点执行编译后的任务图，用于分布式推理服务。\textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) 将系统视角扩展到多智能体推理基础设施。
+
+\smallskip
+\noindent 这一闭环的逻辑是：架构定制暴露可复用硬件能力，硬件综合将其转化为高效实现，而大模型时代的技术推进既有编译和协同设计工具链，并提供持续演化的能力，使该闭环真正变得可实践、可自我改进。
+
+\section{论文发表}
+\CVItemListStart
+\CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. ASPLOS '26. \DOILink{10.1145/3779212.3790162}. \textbf{\textcolor{red}{[最佳论文奖，5/1048]}}}
+\CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240817}. [邀请论文]}
+\CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240669}. (*共同一作)}
+\CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. DAC '25. \DOILink{10.1109/DAC63849.2025.11132875}.}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. LATTE '25. \ProjectLink{https://capra.cs.cornell.edu/latte25/paper/1.pdf}{paper}.}
+\CVItem{Fan Cui, \textbf{Youwei Xiao}, Kexing Zhou, and Yun Liang. 2025. An Empirical Comparison of LLM-based Hardware Design and High-level Synthesis. FPGA '25. \DOILink{10.1145/3706628.3708861}.}
+\CVItem{Fan Cui, Chenyang Yin, Kexing Zhou, \textbf{Youwei Xiao}, Guangyu Sun, Qiang Xu, Qipeng Guo, Yun Liang, Xingcheng Zhang, Demin Song, and Dahua Lin. 2024. OriGen: Enhancing RTL Code Generation with Code-to-Code Augmentation and Self-Reflection. ICCAD '24. \DOILink{10.1145/3676536.3676830}.}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Kexing Zhou, and Yun Liang. 2024. Cement: Streamlining FPGA Hardware Design with Cycle-Deterministic eHDL and Synthesis. FPGA '24. \DOILink{10.1145/3626202.3637561}.}
+\CVItem{Ruifan Xu, \textbf{Youwei Xiao}, Jin Luo, and Yun Liang. 2022. HECTOR: A Multi-Level Intermediate Representation for Hardware Synthesis Methodologies. ICCAD '22. \DOILink{10.1145/3508352.3549370}.}
+\CVItemListEnd
+
+\section{预印本}
+\CVItemListStart
+\CVItem{Chenyun Yin*, \textbf{Youwei Xiao*}, Yuze Luo, Yuyang Zou, and Yun Liang. LLM-Guided Strategy Synthesis for Scalable Equality Saturation. \ArxivLink{2604.17364}. (*共同一作)}
+\CVItem{Zizhang Luo, Yuhao Luo, \textbf{Youwei Xiao}, Yansong Xu, Runlin Guo, and Yun Liang. Hive: A Multi-Agent Infrastructure for Algorithm- and Task-Level Scaling. \ArxivLink{2604.17353}.}
+\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. \ArxivLink{2511.22267}.}
+\CVItem{\textbf{Youwei Xiao}, Yuyang Zou, and Yun Liang. SkyEgg: Joint Implementation Selection and Scheduling for Hardware Synthesis using E-graphs. \ArxivLink{2511.15323}.}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Weijie Peng, Yuyang Zou, and Yun Liang. Cement2: Temporal Hardware Transactions for High-Level and Efficient FPGA Programming. \ArxivLink{2511.15073}.}
+\CVItemListEnd
+
+\section{荣誉奖励}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {学术之芯}{2026}
+      {北京大学集成电路学院2026年度荣誉，授予8人}{}
+    \CVSubheading
+      {博士研究生校长奖学金}{2026-2027}
+      {北京大学；集成电路学院授予10人}{}
+    \CVSubheading
+      {ASPLOS 2026 最佳论文奖}{2026年3月}
+      {Finding Reusable Instructions via E-Graph Anti-Unification}{5/1048 submissions}
+    \CVSubheading
+      {EDAthon 2020 第二名}{2020年8月}
+      {电子设计自动化编程竞赛}{IEEE CEDA Hong Kong Chapter}
+    \CVSubheading
+      {深圳证券交易所奖学金}{2019-2020}
+      {北京大学信息科学技术学院17人获奖}{}
+    \CVSubheading
+      {三好学生}{2018-2019、2019-2020}
+      {综合表现优秀，授予前10\%学生}{}
+    \CVSubheading
+      {杨芙清-王阳元院士奖学金}{2018-2019}
+      {北京大学信息科学技术学院仅5人获奖}{}
+    \CVSubheading
+      {NOI 2017 二等奖}{2017年7月}
+      {全国青少年信息学奥林匹克竞赛}{中国计算机学会}
+    \CVSubheading
+      {APIO 2017 二等奖}{2017年5月}
+      {亚太地区信息学奥林匹克中国赛区}{中国计算机学会}
+  \CVSubHeadingListEnd
+
+\section{教程报告}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {APS: An MLIR-Based Hardware-Software Co-design Framework}{2026年1月}
+      {ASP-DAC 2026}{中国香港}
+    \CVSubheading
+      {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{2025年5月}
+      {ISEDA 2025}{中国香港}
+    \CVSubheading
+      {Agile Hardware Specialization (AHS)}{2025年3月}
+      {ASPLOS 2025}{荷兰鹿特丹}
+    \CVSubheading
+      {Agile Hardware Specialization: A toolbox for Agile Chip Front-end Design}{2025年3月}
+      {DATE 2025}{法国里昂}
+    \CVSubheading
+      {AHS: An EDA toolbox for Agile Chip Front-end Design}{2025年1月}
+      {ASP-DAC 2025}{日本东京}
+  \CVSubHeadingListEnd
+
+\section{教学经历}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {高层次芯片设计课程助教}{2022年春季、2022年秋季}
+      {北京大学}{}
+    \CVSubheading
+      {计算机系统导论课程助教}{2020年秋季}
+      {北京大学}{}
+  \CVSubHeadingListEnd
+
+\end{document}

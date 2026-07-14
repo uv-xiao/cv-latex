@@ -147,7 +147,7 @@ strokes, sans-serif fonts are sans (without) these strokes.
     fill=StoryLight,
     rounded corners=2pt,
     text width=3.65cm,
-    minimum height=4.25cm,
+    minimum height=4.55cm,
     align=left,
     inner sep=5pt,
     anchor=north
@@ -192,32 +192,33 @@ strokes, sans-serif fonts are sans (without) these strokes.
   \ResearchClassBox{arch}{0}{Architecture customization}
     {Compiler/formal methods, especially e-graphs, automate ISA customization and compiler adaptation.}
     {
-      \ResearchWork{ISAMORE}{ASPLOS '26}
-      \ResearchWork{Cayman}{DAC '25}
-      \ResearchWork{APS / Aquas}{ICCAD '25 + arXiv}
+      \ResearchWork{ISAMORE}{\ProjectLink{https://doi.org/10.1145/3779212.3790162}{ASPLOS '26}}
+      \ResearchWork{Cayman}{\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DAC '25}}
+      \ResearchWork{APS / Aquas}{\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{ICCAD '25} + \ProjectLink{https://arxiv.org/abs/2511.22267}{arXiv}}
     }
 
   \ResearchClassBox{synth}{5.85}{Hardware synthesis}
     {Multi-level IRs and synthesis passes optimize timing, microarchitecture, mapping, and scheduling.}
     {
-      \ResearchWork{Hector}{ICCAD '22}
-      \ResearchWork{Cement / Cement2}{FPGA '24 + arXiv}
-      \ResearchWork{Clay}{ICCAD '25}
-      \ResearchWork{SkyEgg}{arXiv}
+      \ResearchWork{Hector}{\ProjectLink{https://doi.org/10.1145/3508352.3549370}{ICCAD '22}}
+      \ResearchWork{Cement / Cement2}{\ProjectLink{https://doi.org/10.1145/3626202.3637561}{FPGA '24} + \ProjectLink{https://arxiv.org/abs/2511.15073}{arXiv}}
+      \ResearchWork{Clay}{\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{ICCAD '25}}
+      \ResearchWork{SkyEgg}{\ProjectLink{https://arxiv.org/abs/2511.15323}{arXiv}}
     }
 
   \ResearchClassBox{llm}{11.7}{LLM techniques}
-    {LLMs improve compiler/co-design workflows; compiler and runtime systems support LLM workloads.}
+    {LLMs improve compiler/co-design workflows and new-chip kernel development; compiler/runtime systems support LLM workloads.}
     {
-      \ResearchWork{EggMind}{arXiv}
-      \ResearchWork{IntelliC}{GitHub}
+      \ResearchWork{EggMind}{\ProjectLink{https://arxiv.org/abs/2604.17364}{arXiv}}
+      \ResearchWork{IntelliC}{\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}}
       \ResearchWork{Spine}{}
-      \ResearchWork{PTO Runtime}{GitHub}
-      \ResearchWork{Hive}{arXiv}
+      \ResearchWork{Kernel Agents}{new chips}
+      \ResearchWork{PTO Runtime}{\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}}
+      \ResearchWork{Hive}{\ProjectLink{https://arxiv.org/abs/2604.17353}{arXiv}}
     }
 
   \ResearchForwardRelation{arch}{synth}{0cm}{-0.95cm}{custom capabilities\\become implementations}
-  \ResearchForwardRelation{synth}{llm}{0.95cm}{0cm}{IR/runtime evidence\\grounds agents}
+  \ResearchForwardRelation{synth}{llm}{0.95cm}{0cm}{IR/runtime/kernel evidence\\grounds agents}
   \ResearchFeedbackRelation{synth}{arch}{0.58cm}{-1.0cm}{2.7cm}{hardware constraints guide customization}
   \ResearchFeedbackRelation{llm}{synth}{0.58cm}{-1.0cm}{2.7cm}{agents improve synthesis toolchains}
   \ResearchFeedbackRelation{llm}{arch}{0.84cm}{0.9cm}{3.0cm}{LLM-era workflows evolve customization}
@@ -308,6 +309,9 @@ information though). Whatever order you choose be consistent throughout.
     \CVSubheading
       {{Ph.D. Candidate in EDA}}{September 2022 - now}
       {School of Integrated Circuits, Peking University}{Beijing, China}
+      \CVItemListStart
+        \CVItem{Research: compilers, DSLs, hardware-software co-design, and innovative agents for advancing kernel development on new chips.}
+      \CVItemListEnd
       % \CVItemListStart
       %   \CVItem{Relevant Coursework and Scores: Introduction to Computing(A)(Honor Track)(97/100), \ Practice of Programming in C\&C++(96/100), \ Introduction to Artificial Intelligence(88/100), \ Data Structure and Algorithm(A)(90/100), \ Introduction to Computer System(91/100),\ Practice of Data Structure and Algorithm(96/100), \ Algorithm Design and Analysis(86/100), \ Machine Learning(87/100), \ Computer Architectures(91/100), \ Lab on Computer Organization and Architecture(99/100), \ Principles of Compilers(91/100)}
       % \CVItemListEnd
@@ -316,9 +320,19 @@ information though). Whatever order you choose be consistent throughout.
     %   {North Lake College}{Irving, TX}
   \CVSubHeadingListEnd
 
+\section{Work Experience}
+  \CVSubHeadingListStart
+    \CVSubheading
+      {Large Language Model Algorithm Intern}{2026 -- Present}
+      {ByteDance Seed}{Beijing, China}
+      \CVItemListStart
+        \CVItem{Creating innovative agents for advancing kernel development on new chips.}
+      \CVItemListEnd
+  \CVSubHeadingListEnd
+
 \section{Research}
 
-My research builds compiler-centered hardware-software co-design systems for domain-specific computing. The central problem is how real software demands can be translated into reusable architectural capabilities, realized as high-quality hardware, and exposed back to software through compiler interfaces that remain analyzable, verifiable, and reusable.
+My research builds compiler-centered hardware-software co-design systems for domain-specific computing, and more recently innovative agents that advance kernel development on new chips. The central problem is how real software demands can be translated into reusable architectural capabilities, realized as high-quality hardware, and exposed back to software through compiler interfaces and agentic workflows that remain analyzable, verifiable, and reusable.
 
 \ResearchStoryDiagram
 
@@ -329,7 +343,7 @@ My research builds compiler-centered hardware-software co-design systems for dom
 \noindent \textbf{Hardware synthesis.} I created intermediate representations at multiple abstraction levels and proposed synthesis passes that optimize timing, microarchitecture, mapping, and scheduling. \textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) provides a multi-level MLIR substrate for hardware synthesis. \textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) and \textit{Cement2} (\ProjectLink{https://arxiv.org/abs/2511.15073}{preprint}) make cycle timing and temporal transactions first-class FPGA design abstractions. \textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI}) synthesizes microarchitecture-aware ASIP instructions, while \textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) uses e-graphs for joint implementation selection and scheduling.
 
 \smallskip
-\noindent \textbf{LLM techniques.} I explored both LLMs for compilers and compiler/system techniques for LLMs. \textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) uses LLMs to synthesize reusable equality-saturation strategies. \textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) studies inspectable compiler representations for human and agent collaboration. \textit{Spine} builds agentic compiler workflows for long-horizon optimization and design adaptation. \textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) executes compiled task graphs for serving on distributed Ascend architectures. \textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) extends the systems view to multi-agent inference infrastructure.
+\noindent \textbf{LLM techniques.} I explored both LLMs for compilers and compiler/system techniques for LLMs, including innovative agents for accelerating kernel development on new chips. \textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) uses LLMs to synthesize reusable equality-saturation strategies. \textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) studies inspectable compiler representations for human and agent collaboration. \textit{Spine} studies verification-bounded agentic co-design, using typed semantic boundaries and executable checks to connect design intent, architecture descriptions, hardware/compiler artifacts, and validation feedback in a traceable closed loop. \textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) executes compiled task graphs for serving on Ascend chips and LingQu SuperPods. \textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) extends the systems view to multi-agent inference infrastructure.
 
 \smallskip
 \noindent The closed loop is that architecture customization exposes reusable hardware capabilities, hardware synthesis turns them into efficient implementations, and LLM-era techniques advance the earlier compiler and co-design toolchains while providing evolving capabilities that make the loop practical and self-improving.
