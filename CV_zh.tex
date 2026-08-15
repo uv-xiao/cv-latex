@@ -168,7 +168,7 @@
   \ResearchFoundationBox{dsl}{0.1}{-4.02}{领域专用语言与编译栈}
     {以 DSL 和多层次 IR 表达软硬件意图，通过编译与综合 passes 逐层降级。}
     {\ProjectLink{https://doi.org/10.1145/3508352.3549370}{Hector}、\ProjectLink{https://doi.org/10.1145/3626202.3637561}{Cement}\\
-     \ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{APS}、\ProjectLink{https://arxiv.org/abs/2511.22267}{Aquas}}
+     \ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{APS}、\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{Aquas}}
   \ResearchFoundationBox{optimization}{5.1}{-4.02}{架构定制与硬件综合优化}
     {以形式化方法、e-graph 与编译搜索自动完成 ISA、微架构及加速器优化。}
     {\ProjectLink{https://doi.org/10.1145/3779212.3790162}{ISAMORE}、\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{Clay}、\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{Cayman}\\
@@ -231,7 +231,7 @@
 \noindent \textbf{编译器与运行时底座。} 既有系统工作提供了智能体可操作的系统界面。\textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) 研究面向人与智能体协作的可检查编译表示。\textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) 面向 Ascend 芯片和灵衢 SuperPod 执行编译后的任务图。\textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) 将多智能体大模型负载暴露给推理基础设施，\textit{Spine} (\ProjectLink{https://github.com/arch-of-shadow/spine}{GitHub}) 研究跨设计意图、架构、编译器、硬件与执行证据的有界智能体协同设计。
 
 \smallskip
-\noindent \textbf{编译器驱动的敏捷芯片设计。} 我此前以编译器为组织架构定制与软硬件协同设计的核心。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 提供面向硬件综合的多层次 IR；\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 将周期确定的 CmtHDL 领域专用语言与具备时序分析、控制综合能力的 CmtC 编译栈结合；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 构建从架构 DSL 到硬件综合和软件编译的开源 MLIR 栈，\textit{Aquas} (\ProjectLink{https://arxiv.org/abs/2511.22267}{preprint}) 进一步加入面向领域的访存/综合指令与基于 e-graph 的可重定向编译器。\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI})、\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 与 \textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 自动化微架构与加速器优化，\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 和 \textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) 则以形式化方法和大模型引导方法组织编译搜索。
+\noindent \textbf{编译器驱动的敏捷芯片设计。} 我此前以编译器为组织架构定制与软硬件协同设计的核心。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 提供面向硬件综合的多层次 IR；\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 将周期确定的 CmtHDL 领域专用语言与具备时序分析、控制综合能力的 CmtC 编译栈结合；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 构建从架构 DSL 到硬件综合和软件编译的开源 MLIR 栈，\textit{Aquas} (\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{ICCAD 2026}) 进一步加入面向领域的访存/综合指令与基于 e-graph 的可重定向编译器。\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI})、\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 与 \textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 自动化微架构与加速器优化，\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 和 \textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) 则以形式化方法和大模型引导方法组织编译搜索。
 
 \smallskip
 \noindent 这条主线使用既有编译器与硬件系统作为基础，迈向下一步：让智能体帮助新芯片更好服务大模型，同时把生成的开发数据与 trajectory 反馈为更强 coding 与系统模型的训练材料。
@@ -239,6 +239,7 @@
 \section{论文发表}
 \CVItemListStart
 \CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. ASPLOS '26. \DOILink{10.1145/3779212.3790162}. \textbf{\textcolor{red}{[最佳论文奖，5/1048]}}}
+\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. 2026. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. ICCAD '26. \ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{论文}.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240817}. [邀请论文]}
 \CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240669}. (*共同一作)}
 \CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. DAC '25. \DOILink{10.1109/DAC63849.2025.11132875}.}
@@ -253,7 +254,6 @@
 \CVItemListStart
 \CVItem{Chenyun Yin*, \textbf{Youwei Xiao*}, Yuze Luo, Yuyang Zou, and Yun Liang. LLM-Guided Strategy Synthesis for Scalable Equality Saturation. \ArxivLink{2604.17364}. (*共同一作)}
 \CVItem{Zizhang Luo, Yuhao Luo, \textbf{Youwei Xiao}, Yansong Xu, Runlin Guo, and Yun Liang. Hive: A Multi-Agent Infrastructure for Algorithm- and Task-Level Scaling. \ArxivLink{2604.17353}.}
-\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. \ArxivLink{2511.22267}.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, and Yun Liang. SkyEgg: Joint Implementation Selection and Scheduling for Hardware Synthesis using E-graphs. \ArxivLink{2511.15323}.}
 \CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Weijie Peng, Yuyang Zou, and Yun Liang. Cement2: Temporal Hardware Transactions for High-Level and Efficient FPGA Programming. \ArxivLink{2511.15073}.}
 \CVItemListEnd
