@@ -28,8 +28,12 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning}
+\usetikzlibrary{arrows.meta,backgrounds,calc,fit,positioning}
 \usepackage{xcolor}
+
+\definecolor{StoryBlue}{HTML}{0B4AA2}
+\definecolor{StoryLight}{HTML}{EAF1FB}
+\definecolor{StoryGreen}{HTML}{008C73}
 
 \addtolength{\oddsidemargin}{-1cm}
 \addtolength{\evensidemargin}{-1cm}
@@ -62,124 +66,94 @@
 \newcommand{\CVSubHeadingListEnd}{\end{itemize}}
 \newcommand{\CVItemListStart}{\begin{itemize}[leftmargin=0.55cm]}
 \newcommand{\CVItemListEnd}{\end{itemize}\vspace{-5pt}}
-\newcommand{\ResearchBlueBox}[6]{
+\newcommand{\ResearchWork}[3]{%
+  \textbf{#1}%
+  \if\relax\detokenize{#2}\relax\else
+    \ (\if\relax\detokenize{#3}\relax #2\else\ProjectLink{#3}{#2}\fi)%
+  \fi\\[0.5pt]
+}
+\newcommand{\ResearchClassBox}[5]{
   \node[
     draw=StoryBlue,
     fill=StoryLight,
     rounded corners=2pt,
-    text width=#4cm,
-    minimum height=1.55cm,
+    text width=4.55cm,
+    minimum height=3.05cm,
     align=left,
-    inner sep=5pt,
-    anchor=north west
-  ] (#1) at (#2,#3) {
-    \centering\color{StoryBlue}\textbf{#5}\par
-    \vspace{2pt}
-    \raggedright\scriptsize #6
-  };
-}
-\newcommand{\ResearchGreenBox}[6]{
-  \node[
-    draw=StoryGreen,
-    fill=StoryGreen!6,
-    rounded corners=2pt,
-    text width=#4cm,
-    minimum height=0.82cm,
-    align=left,
-    inner sep=4pt,
-    anchor=north west
-  ] (#1) at (#2,#3) {
-    \centering\color{StoryGreen}\textbf{#5}\par
-    \vspace{1pt}
-    \raggedright\tiny #6
-  };
-}
-\newcommand{\ResearchFoundationBox}[6]{
-  \node[
-    draw=StoryBlue!55,
-    fill=white,
-    rounded corners=2pt,
-    text width=4.25cm,
-    minimum height=2.65cm,
-    align=left,
-    inner sep=5pt,
-    anchor=north west
-  ] (#1) at (#2,#3) {
-    \centering\color{StoryBlue}\textbf{#4}\par
-    \vspace{2pt}
-    \raggedright\scriptsize #5\par
+    inner sep=6pt,
+    anchor=north
+  ] (#1) at (#2,-0.10) {
+    \centering\color{StoryBlue}\small\textbf{#3}\par
+    \vspace{3pt}
+    \raggedright\fontsize{8.2}{9.6}\selectfont #4\par
     \vspace{4pt}
-    \raggedright\tiny #6
+    \raggedright\fontsize{8.2}{9.8}\selectfont #5
   };
 }
+\newcommand{\ResearchParagraphTitle}[1]{\textcolor{StoryBlue}{\bfseries #1}}
 \newcommand{\ResearchStoryDiagram}{
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize]
-  \definecolor{StoryBlue}{HTML}{0B4AA2}
-  \definecolor{StoryLight}{HTML}{EAF1FB}
-  \definecolor{StoryGreen}{HTML}{008C73}
-
-  \node[anchor=west, color=StoryBlue, font=\scriptsize\bfseries] at (0,1.0)
-    {当前方向：面向新型 AI 芯片 LLM 基础设施的智能体};
-
-  \ResearchBlueBox{agent}{0}{0}{3.65}{原生多智能体架构}
-    {程序化并发模型\\human-in-the-loop 工作流\\编排策略与工作流定制}
-  \ResearchBlueBox{workflow}{5.0}{0}{4.05}{LLM 基础设施研发}
-    {分层算子优化 skill 系统演进\\agent 原生编译体系构建\\芯片架构感知性能优化}
-  \ResearchGreenBox{serving}{10.5}{0.05}{3.65}{模型服务效率}
-    {提升新芯片上的\\大模型服务效率。}
-  \ResearchGreenBox{trajectory}{10.5}{-1.15}{3.65}{开发数据与 trajectory}
-    {沉淀真实系统 trajectory\\增强智能体能力。}
-
-  \draw[-{Latex[length=2mm]}, thick, StoryBlue]
-    (agent.east) -- node[above, fill=white, inner sep=1pt, font=\tiny\bfseries] {落地应用} (workflow.west);
-  \draw[-{Latex[length=2mm]}, thick, StoryGreen]
-    (workflow.north east) to[out=0,in=180]
-    node[pos=0.53, above=3pt, fill=white, inner sep=1pt, font=\tiny\bfseries] {提升服务} (serving.west);
-  \draw[-{Latex[length=2mm]}, thick, StoryGreen]
-    (workflow.south east) to[out=0,in=180]
-    node[pos=0.53, above=2pt, fill=white, inner sep=1pt, font=\tiny\bfseries] {沉淀数据} (trajectory.west);
-  \draw[-{Latex[length=2mm]}, thick, StoryGreen, rounded corners=5pt]
-    (trajectory.east) -- (15.1,-1.6) |- (15.1,0.55) --
-    node[above, fill=white, inner sep=1pt, font=\tiny\bfseries] {训练更强智能体} (2.6,0.55) --
-    (agent.north);
-
   \node[
-    draw=StoryBlue!35,
-    fill=StoryBlue!4,
+    draw=StoryGreen,
+    fill=StoryGreen!6,
     rounded corners=2pt,
-    minimum width=15.1cm,
-    minimum height=3.95cm,
-    anchor=north west
-  ] (foundation) at (-0.2,-3.0) {};
-  \node[anchor=north, color=StoryBlue, font=\scriptsize\bfseries] at (7.35,-3.16)
-    {编译器驱动的敏捷芯片设计基础};
-  \node[anchor=north, font=\tiny] at (7.35,-3.49)
-    {表达设计意图 \(\rightarrow\) 优化软硬件实现 \(\rightarrow\) 执行并获得反馈};
+    text width=16.1cm,
+    minimum height=0.72cm,
+    align=center,
+    inner sep=4pt,
+    anchor=south
+  ] (current) at (5.50,0.82) {
+    \color{StoryGreen}\textbf{实习课题：面向新领域、长任务的芯片算子自动优化Agent}\par
+    \vspace{1pt}\tiny 可扩展数据流芯片算子 Benchmark
+    \enspace\textbar\enspace 多编译路径的分层知识与技能系统
+    \enspace\textbar\enspace 全场景的数据采集与训练工作流
+  };
 
-  \draw[-{Latex[length=2mm]}, thick, StoryBlue]
-    (2.2,-3.0) to[out=90,in=-90] node[fill=white, inner sep=1pt, font=\tiny\bfseries] {结构化产物} (agent.south);
-  \draw[-{Latex[length=2mm]}, thick, StoryBlue]
-    (7.3,-3.0) to[out=90,in=-90] node[fill=white, inner sep=1pt, font=\tiny\bfseries] {优化方法} (workflow.south);
-  \draw[-{Latex[length=2mm]}, thick, StoryBlue]
-    (12.3,-3.0) to[out=90,in=-70] node[fill=white, inner sep=1pt, font=\tiny\bfseries] {执行反馈} (workflow.south east);
+  \node[anchor=base, text=StoryBlue, font=\small\bfseries] (researchlabel) at (5.50,0.20) {科研工作};
 
-  \ResearchFoundationBox{dsl}{0.1}{-4.02}{领域专用语言与编译栈}
-    {以 DSL 和多层次 IR 表达软硬件意图，通过编译与综合 passes 逐层降级。}
-    {\ProjectLink{https://doi.org/10.1145/3508352.3549370}{Hector}、\ProjectLink{https://doi.org/10.1145/3626202.3637561}{Cement}\\
-     \ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{APS}、\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{Aquas}}
-  \ResearchFoundationBox{optimization}{5.1}{-4.02}{架构定制与硬件综合优化}
-    {以形式化方法、e-graph 与编译搜索自动完成 ISA、微架构及加速器优化。}
-    {\ProjectLink{https://doi.org/10.1145/3779212.3790162}{ISAMORE}、\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{Clay}、\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{Cayman}\\
-     \ProjectLink{https://arxiv.org/abs/2511.15323}{SkyEgg}、\ProjectLink{https://arxiv.org/abs/2604.17364}{EggMind}}
-  \ResearchFoundationBox{execution}{10.1}{-4.02}{执行与协同设计系统}
-    {以可检查产物、任务图和运行时反馈连接设计意图、编译结果与真实执行。}
-    {\ProjectLink{https://github.com/uv-xiao/IntelliC}{IntelliC}、\ProjectLink{https://github.com/hw-native-sys/simpler}{PTO Runtime}\\
-     \ProjectLink{https://arxiv.org/abs/2604.17353}{Hive}、\ProjectLink{https://github.com/arch-of-shadow/spine}{Spine}}
+  \ResearchClassBox{arch}{0}{架构描述与探索}
+    {使用编译分析、形式化方法与 DSL 描述并探索架构设计空间。}
+    {
+      \ResearchWork{ISAMORE}{ASPLOS '26}{https://doi.org/10.1145/3779212.3790162}
+      \ResearchWork{Cayman}{DAC '25}{https://doi.org/10.1109/DAC63849.2025.11132875}
+      \ResearchWork{APS}{ICCAD '25}{https://doi.org/10.1109/ICCAD66269.2025.11240817}
+      \ResearchWork{Aquas}{ICCAD '26}{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}
+    }
 
-  \draw[-{Latex[length=1.6mm]}, semithick, StoryBlue] (dsl.east) -- (optimization.west);
-  \draw[-{Latex[length=1.6mm]}, semithick, StoryBlue] (optimization.east) -- (execution.west);
+  \ResearchClassBox{synth}{5.50}{芯片设计语言与编译}
+    {领域专用语言、多层次 IR 与编译栈将架构意图综合为硬件。}
+    {
+      \ResearchWork{Hector}{ICCAD '22}{https://doi.org/10.1145/3508352.3549370}
+      \ResearchWork{Cement}{FPGA '24}{https://doi.org/10.1145/3626202.3637561}
+      \ResearchWork{Cement2}{preprint}{https://arxiv.org/abs/2511.15073}
+      \ResearchWork{Clay}{ICCAD '25}{https://doi.org/10.1109/ICCAD66269.2025.11240669}
+      \ResearchWork{SkyEgg}{preprint}{https://arxiv.org/abs/2511.15323}
+    }
+
+  \ResearchClassBox{systems}{11.0}{编译优化与 LLM 系统}
+    {大模型推进编译与协同设计，编译器/运行时系统支撑 LLM 执行。}
+    {
+      \ResearchWork{EggMind}{preprint}{https://arxiv.org/abs/2604.17364}
+      \ResearchWork{IntelliC}{GitHub}{https://github.com/uv-xiao/IntelliC}
+      \ResearchWork{Spine}{GitHub}{https://github.com/arch-of-shadow/spine}
+      \ResearchWork{PTO Runtime}{GitHub}{https://github.com/hw-native-sys/simpler}
+      \ResearchWork{Hive}{preprint}{https://arxiv.org/abs/2604.17353}
+    }
+
+  \begin{scope}[on background layer]
+    \node[
+      draw=StoryBlue!75,
+      fill=StoryBlue!3,
+      rounded corners=3pt,
+      line width=0.7pt,
+      fit=(researchlabel)(arch)(synth)(systems),
+      inner xsep=9pt,
+      inner ysep=7pt
+    ] {};
+  \end{scope}
+
 \end{tikzpicture}
 }
 \end{center}
@@ -202,7 +176,7 @@
       {北京大学集成电路学院，集成电路科学与工程博士研究生}{2022年9月 -- 至今}
       {导师：梁云教授}{中国北京}
       \CVItemListStart
-        \CVItem{研究方向：面向新型 AI 芯片大模型基础设施的智能体，以编译器驱动的敏捷芯片软硬件协同设计为技术基础。}
+        \CVItem{研究方向：编译器与软硬件协同优化、大模型驱动编译优化与算子生成。}
       \CVItemListEnd
     \CVSubheading
       {北京大学信息科学技术学院，计算机科学与技术理学学士}{2018年9月 -- 2022年7月}
@@ -212,38 +186,38 @@
 \section{工作经历}
   \CVSubHeadingListStart
     \CVSubheading
-      {大语言模型算法实习生}{2026年 -- 至今}
+      {大语言模型算法实习生}{2026年6月 -- 至今}
       {ByteDance Seed}{中国北京}
       \CVItemListStart
-        \CVItem{参与原生多智能体 coding agent 系统研发，聚焦多智能体编排策略与工作流定制，并以程序化并发和 human-in-the-loop 工作流支撑长程系统研发。}
-        \CVItem{将这些方法用于 LLM 基础设施：演进抽象分层的算子优化 skill 系统，并构建面向新型 AI 芯片的 agent 原生编译体系。}
-        \CVItem{沉淀真实系统任务中的智能体开发数据与 trajectory，将基础设施研发过程转化为增强 coding 与系统智能体能力的训练信号。}
+        \CVItem{创建面向数据流架构芯片、覆盖算子编程与优化任务的可扩展 Benchmark。}
+        \CVItem{构建多编译路径的分层知识与技能系统，以及全场景的数据采集与训练工作流，以持续演进模型能力。}
+        \CVItem{最终目标是构建一套方法与流程，使模型与智能体能够快速具备面向新芯片架构的专家级算子优化能力。}
       \CVItemListEnd
   \CVSubHeadingListEnd
 
 \section{研究方向}
 
-我当前的研究聚焦于面向新型 AI 芯片 LLM 基础设施的智能体。我参与原生多智能体 coding agent 系统研发，主要关注多智能体编排策略与工作流定制，并以程序化并发和 human-in-the-loop 工作流支撑长程系统研发；将这些方法用于演进抽象分层的算子优化 skill 系统与 agent 原生编译体系，由此提升模型服务效率，并将真实研发 trajectory 转化为增强 coding 与系统智能体能力的训练数据。
+我的研究方向是编译器与软硬件协同优化、大模型驱动编译优化与算子生成，围绕敏捷芯片设计与编译优化的软硬件协同形成三个相互耦合的方向：架构描述与探索发现并形式化可复用硬件能力；芯片设计语言与编译表达这些能力并将其综合为具体实现；编译优化与 LLM 系统持续改进编译、执行和协同设计流程。当前工作创建面向数据流架构芯片、覆盖算子编程与优化任务的可扩展 Benchmark，构建多编译路径的分层知识与技能系统，以及全场景的数据采集与训练工作流，以持续演进模型能力。最终目标是构建一套方法与流程，使模型与智能体能够快速具备面向新芯片架构的专家级算子优化能力。
 
 \ResearchStoryDiagram
 
 \smallskip
-\noindent \textbf{编译器与运行时底座。} 既有系统工作提供了智能体可操作的系统界面。\textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) 研究面向人与智能体协作的可检查编译表示。\textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) 面向 Ascend 芯片和灵衢 SuperPod 执行编译后的任务图。\textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) 将多智能体大模型负载暴露给推理基础设施，\textit{Spine} (\ProjectLink{https://github.com/arch-of-shadow/spine}{GitHub}) 研究跨设计意图、架构、编译器、硬件与执行证据的有界智能体协同设计。
+\noindent \ResearchParagraphTitle{架构描述与探索。} 我结合编译分析、形式化方法和架构 DSL，表示并搜索设计空间，并将定制硬件能力连接到可编程软件。\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 通过对等价程序片段进行反合一发现可复用自定义指令；\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 从完整应用中发现加速器机会，并协同优化控制流与数据访问；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 和 \textit{Aquas} (\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{ICCAD 2026}) 通过 DSL 描述定制架构，并以完整软硬件编译栈暴露其可编程能力。
 
 \smallskip
-\noindent \textbf{编译器驱动的敏捷芯片设计。} 我此前以编译器为组织架构定制与软硬件协同设计的核心。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 提供面向硬件综合的多层次 IR；\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 将周期确定的 CmtHDL 领域专用语言与具备时序分析、控制综合能力的 CmtC 编译栈结合；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 构建从架构 DSL 到硬件综合和软件编译的开源 MLIR 栈，\textit{Aquas} (\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{ICCAD 2026}) 进一步加入面向领域的访存/综合指令与基于 e-graph 的可重定向编译器。\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI})、\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 与 \textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 自动化微架构与加速器优化，\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 和 \textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) 则以形式化方法和大模型引导方法组织编译搜索。
+\noindent \ResearchParagraphTitle{芯片设计语言与编译。} 我在多个抽象层次设计领域专用语言和中间表示，并提出编译与综合 pass，用于优化时序、微架构、实现选择、映射与调度。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 提供多层次 MLIR 基础；\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 与 \textit{Cement2} (\ProjectLink{https://arxiv.org/abs/2511.15073}{preprint}) 分别提出周期确定的 DSL 与时间事务抽象；\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI}) 实现微架构感知的 ASIP 指令；\textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 使用 e-graph 联合优化实现选择与调度。
 
 \smallskip
-\noindent 这条主线使用既有编译器与硬件系统作为基础，迈向下一步：让智能体帮助新芯片更好服务大模型，同时把生成的开发数据与 trajectory 反馈为更强 coding 与系统模型的训练材料。
+\noindent \ResearchParagraphTitle{编译优化与 LLM 系统。} 我探索大模型推进编译与软硬件协同设计，并研究支撑大模型负载的编译与系统技术。\textit{EggMind} (\ProjectLink{https://arxiv.org/abs/2604.17364}{preprint}) 使用大模型生成等价饱和策略，以实现规模化的编译器超优化探索；\textit{IntelliC} (\ProjectLink{https://github.com/uv-xiao/IntelliC}{GitHub}) 研究面向人与模型协作的可检查编译表示；\textit{Spine} (\ProjectLink{https://github.com/arch-of-shadow/spine}{GitHub}) 以验证边界约束从高层次架构意图到芯片设计的跨层协同生成；\textit{PTO Runtime} (\ProjectLink{https://github.com/hw-native-sys/simpler}{GitHub}) 面向 Ascend 芯片和灵衢 SuperPod，支持编译任务图的动态算子融合与分布式执行；\textit{Hive} (\ProjectLink{https://arxiv.org/abs/2604.17353}{preprint}) 提供多智能体推理基础设施。
 
 \section{论文发表}
 \CVItemListStart
 \CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. ASPLOS '26. \DOILink{10.1145/3779212.3790162}. \textbf{\textcolor{red}{[最佳论文奖，5/1048]}}}
-\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. 2026. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. ICCAD '26. \ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{论文}.}
+\CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. 2026. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. ICCAD '26.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240817}. [邀请论文]}
 \CVItem{Weijie Peng*, \textbf{Youwei Xiao*}, Yuyang Zou, Zizhang Luo, and Yun Liang. 2025. Clay: High-level ASIP Framework for Flexible Microarchitecture-Aware Instruction Customization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240669}. (*共同一作)}
 \CVItem{\textbf{Youwei Xiao}, Fan Cui, Zizhang Luo, Weijie Peng, and Yun Liang. 2025. Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization. DAC '25. \DOILink{10.1109/DAC63849.2025.11132875}.}
-\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. LATTE '25. \ProjectLink{https://capra.cs.cornell.edu/latte25/paper/1.pdf}{paper}.}
+\CVItem{\textbf{Youwei Xiao}, Zizhang Luo, and Yun Liang. 2025. cmt2: Rule-Based Hardware Description in Rust with Temporal Semantics. LATTE '25.}
 \CVItem{Fan Cui, \textbf{Youwei Xiao}, Kexing Zhou, and Yun Liang. 2025. An Empirical Comparison of LLM-based Hardware Design and High-level Synthesis. FPGA '25. \DOILink{10.1145/3706628.3708861}.}
 \CVItem{Fan Cui, Chenyang Yin, Kexing Zhou, \textbf{Youwei Xiao}, Guangyu Sun, Qiang Xu, Qipeng Guo, Yun Liang, Xingcheng Zhang, Demin Song, and Dahua Lin. 2024. OriGen: Enhancing RTL Code Generation with Code-to-Code Augmentation and Self-Reflection. ICCAD '24. \DOILink{10.1145/3676536.3676830}.}
 \CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Kexing Zhou, and Yun Liang. 2024. Cement: Streamlining FPGA Hardware Design with Cycle-Deterministic eHDL and Synthesis. FPGA '24. \DOILink{10.1145/3626202.3637561}.}
@@ -256,6 +230,12 @@
 \CVItem{Zizhang Luo, Yuhao Luo, \textbf{Youwei Xiao}, Yansong Xu, Runlin Guo, and Yun Liang. Hive: A Multi-Agent Infrastructure for Algorithm- and Task-Level Scaling. \ArxivLink{2604.17353}.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, and Yun Liang. SkyEgg: Joint Implementation Selection and Scheduling for Hardware Synthesis using E-graphs. \ArxivLink{2511.15323}.}
 \CVItem{\textbf{Youwei Xiao}, Zizhang Luo, Weijie Peng, Yuyang Zou, and Yun Liang. Cement2: Temporal Hardware Transactions for High-Level and Efficient FPGA Programming. \ArxivLink{2511.15073}.}
+\CVItemListEnd
+
+\section{学术服务}
+\CVItemListStart
+\CVItem{\textbf{技术程序委员会：}MICRO 2026 学生技术程序委员会委员；MLCAD 2026 技术程序委员会委员。}
+\CVItem{\textbf{期刊评审：}IEEE TCAD（2024）；ACM TECS（2024）。}
 \CVItemListEnd
 
 \section{荣誉奖励}
@@ -274,7 +254,7 @@
       {电子设计自动化编程竞赛}{IEEE CEDA Hong Kong Chapter}
     \CVSubheading
       {深圳证券交易所奖学金}{2019-2020}
-      {北京大学信息科学技术学院17人获奖}{}
+      {}{}
     \CVSubheading
       {三好学生}{2018-2019、2019-2020}
       {综合表现优秀，授予前10\%学生}{}
