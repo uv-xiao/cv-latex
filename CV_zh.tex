@@ -117,6 +117,7 @@
     {使用编译分析、形式化方法与 DSL 描述并探索架构设计空间。}
     {
       \ResearchWork{ISAMORE}{ASPLOS '26}{https://doi.org/10.1145/3779212.3790162}
+      \ResearchWork{ScaleISA}{ASPLOS '27}{https://doi.org/10.1145/3845814.3850048}
       \ResearchWork{Cayman}{DAC '25}{https://doi.org/10.1109/DAC63849.2025.11132875}
       \ResearchWork{APS}{ICCAD '25}{https://doi.org/10.1109/ICCAD66269.2025.11240817}
       \ResearchWork{Aquas}{ICCAD '26}{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}
@@ -202,7 +203,7 @@
 \ResearchStoryDiagram
 
 \smallskip
-\noindent \ResearchParagraphTitle{架构描述与探索。} 我结合编译分析、形式化方法和架构 DSL，表示并搜索设计空间，并将定制硬件能力连接到可编程软件。\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 通过对等价程序片段进行反合一发现可复用自定义指令；\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 从完整应用中发现加速器机会，并协同优化控制流与数据访问；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 和 \textit{Aquas} (\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{ICCAD 2026}) 通过 DSL 描述定制架构，并以完整软硬件编译栈暴露其可编程能力。
+\noindent \ResearchParagraphTitle{架构描述与探索。} 我结合编译分析、形式化方法和架构 DSL，表示并搜索设计空间，并将定制硬件能力连接到可编程软件。\textit{ISAMORE} (\ProjectLink{https://doi.org/10.1145/3779212.3790162}{DOI}) 通过对等价程序片段进行反合一发现可复用自定义指令；\textit{ScaleISA} (\ProjectLink{https://doi.org/10.1145/3845814.3850048}{DOI}, ASPLOS 2027) 是 ISAMORE 的 MLIR 拓展，通过多层次 e-graph 反合一发现可扩展自定义指令；\textit{Cayman} (\ProjectLink{https://doi.org/10.1109/DAC63849.2025.11132875}{DOI}) 从完整应用中发现加速器机会，并协同优化控制流与数据访问；\textit{APS} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240817}{DOI}, \ProjectLink{https://github.com/pku-liang/APS}{GitHub}) 和 \textit{Aquas} (\ProjectLink{https://uv-xiao.github.io/assets/pdf/aquas_iccad.pdf}{ICCAD 2026}) 通过 DSL 描述定制架构，并以完整软硬件编译栈暴露其可编程能力。
 
 \smallskip
 \noindent \ResearchParagraphTitle{芯片设计语言与编译。} 我在多个抽象层次设计领域专用语言和中间表示，并提出编译与综合 pass，用于优化时序、微架构、实现选择、映射与调度。\textit{Hector} (\ProjectLink{https://doi.org/10.1145/3508352.3549370}{DOI}, \ProjectLink{https://github.com/pku-liang/Hector}{GitHub}) 提供多层次 MLIR 基础；\textit{Cement} (\ProjectLink{https://doi.org/10.1145/3626202.3637561}{DOI}) 与 \textit{Cement2} (\ProjectLink{https://arxiv.org/abs/2511.15073}{preprint}) 分别提出周期确定的 DSL 与时间事务抽象；\textit{Clay} (\ProjectLink{https://doi.org/10.1109/ICCAD66269.2025.11240669}{DOI}) 实现微架构感知的 ASIP 指令；\textit{SkyEgg} (\ProjectLink{https://arxiv.org/abs/2511.15323}{preprint}) 使用 e-graph 联合优化实现选择与调度。
@@ -212,6 +213,7 @@
 
 \section{论文发表}
 \CVItemListStart
+\CVItem{Yitian Sun, \textbf{Youwei Xiao}, Yuyang Zou, Chenyun Yin, and Yun Liang. 2027. Customizing Scalable Instructions via Multi-Level E-Graph Anti-Unification. ASPLOS '27. \DOILink{10.1145/3845814.3850048}.}
 \CVItem{\textbf{Youwei Xiao}, Chenyun Yin, Yitian Sun, and Yun Liang. 2026. Finding Reusable Instructions via E-Graph Anti-Unification. ASPLOS '26. \DOILink{10.1145/3779212.3790162}. \textbf{\textcolor{red}{[最佳论文奖，5/1048]}}}
 \CVItem{Yuyang Zou, \textbf{Youwei Xiao}, Yansong Xu, Chenyun Yin, Yuhao Luo, Yitian Sun, Ruifan Xu, Renze Chen, and Yun Liang. 2026. Aquas: Enhancing Domain Specialization through Holistic Hardware-Software Co-Optimization based on MLIR. ICCAD '26.}
 \CVItem{\textbf{Youwei Xiao}, Yuyang Zou, Yansong Xu, Yuhao Luo, Yitian Sun, Chenyun Yin, Ruifan Xu, Renze Chen, and Yun Liang. 2025. APS: Open-Source Hardware-Software Co-Design Framework for Agile Processor Specialization. ICCAD '25. \DOILink{10.1109/ICCAD66269.2025.11240817}. [邀请论文]}
